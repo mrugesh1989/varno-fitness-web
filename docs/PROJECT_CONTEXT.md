@@ -6,7 +6,8 @@ Use this file to quickly understand **what exists** and **design decisions** wit
 
 - **Client:** Varno Fitness — hybrid gym in **Atlantic Highlands, NJ** (partnered with Isabella Fitness).
 - **Goal:** Marketing site: programs, schedule link-out, about/location, contact / free assessment CTA.
-- **Production URL (intended):** `https://varnofitness.com` (DNS points to GitHub Pages after deploy).
+- **Current URL:** `https://mrugesh1989.github.io/varno-fitness-web/` (GitHub Pages project URL).
+- **Future URL:** `https://varnofitness.com` once DNS is moved off GoDaddy (see `HOSTING_AND_DNS.md` Part C).
 
 ## Tech stack
 

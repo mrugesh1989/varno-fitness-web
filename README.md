@@ -2,6 +2,9 @@
 
 Modern marketing site for **Varno Fitness** (Atlantic Highlands, NJ), aligned with partner brand [Isabella Fitness](https://isabellafitness.com/). Built with **Next.js 15** (App Router), **TypeScript**, **Tailwind CSS**, exported as a fully static site, and hosted on **GitHub Pages**. Contact-form submissions are delivered to `varnofitness@gmail.com` via [Web3Forms](https://web3forms.com).
 
+**Live URL:** https://mrugesh1989.github.io/varno-fitness-web/
+**Repository:** https://github.com/mrugesh1989/varno-fitness-web
+
 ## Documentation (start here if you are new to this stack)
 
 | Doc | What it is for |
@@ -38,21 +41,9 @@ See [`.env.example`](.env.example).
 
 - **`NEXT_PUBLIC_WEB3FORMS_KEY`** — Access key from [Web3Forms](https://web3forms.com). The form POSTs directly to `https://api.web3forms.com/submit`; the key is rate-limited per inbox and is safe to ship in the client bundle. The key must also be added to GitHub Actions secrets so production builds receive it.
 
-## Host on `varnofitness.com` via GitHub Pages
+## Deploy
 
-1. Push this repository to GitHub.
-2. In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-3. **Settings → Secrets and variables → Actions** → add `NEXT_PUBLIC_WEB3FORMS_KEY`.
-4. Push to `main`; the workflow in `.github/workflows/deploy.yml` builds the static export and publishes `out/` to Pages.
-5. **Settings → Pages → Custom domain** → enter `varnofitness.com` (the repo already includes `public/CNAME`).
-6. At GoDaddy (or current registrar) → **DNS management**:
-   - Remove old GoDaddy Website Builder / parking records.
-   - Apex `A` records pointing to GitHub Pages IPs:
-     `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`.
-   - `CNAME` for `www` → `<github-username>.github.io.`.
-7. Back in GitHub Pages settings, enable **Enforce HTTPS** once DNS propagates.
-
-Full steps and troubleshooting: [docs/HOSTING_AND_DNS.md](docs/HOSTING_AND_DNS.md) (Part B).
+Every push to `main` builds the static export and publishes it via the workflow at `.github/workflows/deploy.yml`. The site currently serves from the GitHub project-page URL (`https://mrugesh1989.github.io/varno-fitness-web/`). To switch to the custom domain `varnofitness.com` later, follow [docs/HOSTING_AND_DNS.md](docs/HOSTING_AND_DNS.md).
 
 ### Email note
 

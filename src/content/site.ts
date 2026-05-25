@@ -1,11 +1,15 @@
 /** Public business facts and copy for Varno Fitness (Atlantic Highlands, NJ). */
 
+const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://mrugesh1989.github.io/varno-fitness-web"
+).replace(/\/$/, "");
+
 export const site = {
   name: "Varno Fitness",
   tagline: "The place where we meet you where you are",
   description:
     "Hybrid training in Atlantic Highlands: group classes, private coaching, and youth fitness—partnered with Isabella Fitness.",
-  url: "https://varnofitness.com",
+  url: SITE_URL,
   phoneDisplay: "(732) 977-2916",
   phoneTel: "+17329772916",
   email: "varnofitness@gmail.com",

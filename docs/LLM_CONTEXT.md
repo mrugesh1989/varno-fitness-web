@@ -8,10 +8,12 @@ Single-file briefing for any AI assistant or new engineer. Read this first; then
 
 Marketing website for **Varno Fitness** (Atlantic Highlands, NJ — partnered
 with Isabella Fitness). Five public pages, exported as a fully static Next.js
-site, hosted on **GitHub Pages** at `varnofitness.com`. The contact form posts
-directly from the browser to **Web3Forms**, which emails submissions to
-`varnofitness@gmail.com`. There is no backend, database, auth, CMS, or
-e-commerce in this repository.
+site, currently hosted on **GitHub Pages** at
+`https://mrugesh1989.github.io/varno-fitness-web/` (custom domain
+`varnofitness.com` is planned but DNS hasn't been switched yet). The contact
+form posts directly from the browser to **Web3Forms**, which emails
+submissions to `varnofitness@gmail.com`. There is no backend, database, auth,
+CMS, or e-commerce in this repository.
 
 ## 2. Tech stack
 
@@ -92,14 +94,17 @@ There is **no CMS** and **no database**. All copy ships in the bundle.
 
 ## 6. Environment variables
 
-Defined in `.env.example`; consumed only by `ContactForm.tsx`.
+Read at build time, inlined into the static bundle. The workflow at
+`.github/workflows/deploy.yml` sets them for production builds.
 
 | Var | Required? | Purpose |
 |-----|-----------|---------|
-| `NEXT_PUBLIC_WEB3FORMS_KEY` | yes | Web3Forms access key. Must also exist as a GitHub Actions secret so production builds receive it. |
+| `NEXT_PUBLIC_WEB3FORMS_KEY` | yes (otherwise the form errors) | Web3Forms access key. Lives in repo secret `NEXT_PUBLIC_WEB3FORMS_KEY`. |
+| `NEXT_PUBLIC_BASE_PATH` | yes for GitHub project-page URL | Currently `/varno-fitness-web`. Set empty (or unset) when serving from a root domain like `varnofitness.com`. Drives `next.config.ts` basePath + asset prefix + the prefix applied to `/images/*` in `src/content/media.ts`. |
+| `NEXT_PUBLIC_SITE_URL` | yes | Canonical site URL; used for `<link rel="canonical">`, OG metadata, JSON-LD, sitemap, and robots. Default in code: the github.io URL. |
 
-The key is rate-limited per inbox by Web3Forms; exposing it in the client
-bundle is acceptable (same as Formspree/Web3Forms' documented usage).
+The Web3Forms key is rate-limited per inbox by Web3Forms; exposing it in the
+client bundle is acceptable (same as Formspree/Web3Forms' documented usage).
 
 ## 7. Local commands
 
@@ -120,13 +125,17 @@ Stale build errors (`ENOENT … .next/server/...`) → `rm -rf .next && npm run 
 GitHub Pages, automated by `.github/workflows/deploy.yml`:
 
 1. Push to `main` (or trigger the workflow manually).
-2. Workflow installs deps in `varno-fitness-web/`, runs `npm run build`, uploads
-   `out/` as the Pages artifact, deploys.
-3. Required secret: `NEXT_PUBLIC_WEB3FORMS_KEY`.
-4. Custom domain `varnofitness.com` is set by `public/CNAME` and DNS:
-   - Apex `A` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - `www` `CNAME` → `<github-username>.github.io.`
-5. HTTPS issued automatically by Pages once DNS resolves.
+2. Workflow installs deps, runs `npm run build` with `NEXT_PUBLIC_BASE_PATH`,
+   `NEXT_PUBLIC_SITE_URL`, and `NEXT_PUBLIC_WEB3FORMS_KEY` set, uploads `out/`
+   as the Pages artifact, deploys.
+3. Repo secret: `NEXT_PUBLIC_WEB3FORMS_KEY` (set via
+   `gh secret set NEXT_PUBLIC_WEB3FORMS_KEY`).
+4. Pages source: GitHub Actions; HTTPS enforced.
+
+To move to the custom domain `varnofitness.com` later, follow
+`HOSTING_AND_DNS.md` Part C — clear the two `NEXT_PUBLIC_BASE_PATH` /
+`NEXT_PUBLIC_SITE_URL` env vars in the workflow, restore `public/CNAME`, set
+the Pages `cname` via API, then update DNS at the registrar.
 
 If GitHub Pages ever becomes unsuitable (need ISR, on-request server logic,
 authenticated endpoints), the same `out/` artifact runs on any static CDN

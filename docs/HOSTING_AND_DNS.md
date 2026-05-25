@@ -1,4 +1,4 @@
-# Run locally and host on `varnofitness.com`
+# Run locally and host on GitHub Pages
 
 ## Part A — Run on your computer
 
@@ -29,78 +29,109 @@
    npm run dev
    ```
 6. In a browser, open **http://localhost:3000**.
-   - From another device on the same Wi-Fi, use the “Network” URL printed in the terminal (e.g. `http://192.168.x.x:3000`).
+   - From another device on the same Wi-Fi, use the "Network" URL printed in the terminal (e.g. `http://192.168.x.x:3000`).
 
 ### Useful commands
 
 | Command | When to use |
 |---------|-------------|
-| `npm run dev` | Local development with hot reload. |
-| `npm run build` | Build the static export (output in `out/`). |
+| `npm run dev` | Development server (no basePath, serves from `/`). |
+| `npm run build` | Build the static export. With env vars (below) it produces files sized for the GitHub Pages project URL. |
 | `npm run lint` | Check code style / common issues. |
 
-To preview the production build locally:
+To preview a production build locally that matches what GitHub Pages serves:
 
 ```bash
-npm run build
-npx serve out
+NEXT_PUBLIC_BASE_PATH=/varno-fitness-web \
+  NEXT_PUBLIC_SITE_URL=https://mrugesh1989.github.io/varno-fitness-web \
+  npm run build
+npx serve out -l 3001
+# visit http://localhost:3001/varno-fitness-web/
 ```
 
 ---
 
-## Part B — Host on `varnofitness.com` via GitHub Pages
+## Part B — Current deployment (GitHub Pages, project URL)
 
-**Idea:** Site files are committed to GitHub. A GitHub Actions workflow builds the static export and publishes `out/` to Pages. Your registrar (GoDaddy) is updated to point DNS at GitHub.
+The repo `mrugesh1989/varno-fitness-web` is already wired up:
 
-### 1) Push code to GitHub
+- **Public URL:** https://mrugesh1989.github.io/varno-fitness-web/
+- **Workflow:** `.github/workflows/deploy.yml` runs on every push to `main` and on manual dispatch.
+- **Pages source:** GitHub Actions.
+- **HTTPS:** enforced.
+- **Build-time env vars (set inside the workflow):**
+  - `NEXT_PUBLIC_BASE_PATH=/varno-fitness-web`
+  - `NEXT_PUBLIC_SITE_URL=https://mrugesh1989.github.io/varno-fitness-web`
+  - `NEXT_PUBLIC_WEB3FORMS_KEY` — pulled from repo secret of the same name.
 
-- Create a repository (public or private — Pages works on both with a Pro/Free account in 2026).
-- Push this project. If the repo root is **not** `varno-fitness-web`, the workflow (`varno-fitness-web/.github/workflows/deploy.yml`) already accounts for the subfolder via `working-directory`.
+To redeploy after a change:
 
-### 2) Enable Pages with the GitHub Actions source
+```bash
+git add -A
+git commit -m "your message"
+git push
+# or trigger manually:
+./.gh-bin/gh workflow run "Deploy to GitHub Pages"
+```
 
-1. Repo → **Settings → Pages**.
-2. **Build and deployment → Source: GitHub Actions**.
+### Add or rotate the Web3Forms key
 
-### 3) Add the Web3Forms key as a build secret
+```bash
+./.gh-bin/gh secret set NEXT_PUBLIC_WEB3FORMS_KEY --body 'your-access-key'
+./.gh-bin/gh workflow run "Deploy to GitHub Pages"
+```
 
-1. Repo → **Settings → Secrets and variables → Actions → New repository secret**.
-2. Name: `NEXT_PUBLIC_WEB3FORMS_KEY`. Value: your Web3Forms access key.
-3. The workflow injects it at build time so the static bundle can call the Web3Forms API in production.
+---
 
-### 4) Trigger the first deploy
+## Part C — Moving to `varnofitness.com` later
 
-- Push to `main` (or run the workflow manually from the **Actions** tab).
-- The workflow runs `npm ci && npm run build` in `varno-fitness-web/`, uploads `out/`, and Pages publishes it.
-- You will get a temporary URL like `https://<user>.github.io/<repo>/`.
+When you are ready to point the custom domain at the site (no rebuild needed unless the URL changes):
 
-### 5) Attach the custom domain
+### 1. Edit the workflow build-time vars
 
-1. Repo → **Settings → Pages → Custom domain** → enter `varnofitness.com`.
-2. The repo already contains `public/CNAME` with this value so Pages keeps the binding on every deploy.
+In `.github/workflows/deploy.yml`, either delete both env vars or set them to the custom domain:
 
-### 6) Update DNS at the registrar
+```yaml
+env:
+  NEXT_PUBLIC_WEB3FORMS_KEY: ${{ secrets.NEXT_PUBLIC_WEB3FORMS_KEY }}
+  # Both vars empty = build for an apex/root deployment.
+  NEXT_PUBLIC_BASE_PATH: ""
+  NEXT_PUBLIC_SITE_URL: https://varnofitness.com
+```
 
-**Important:** Remove or disable anything that still points the domain to **GoDaddy Website Builder** or old parking/hosting.
+### 2. Restore the `CNAME`
 
-1. Log in to GoDaddy → **DNS management** for `varnofitness.com`.
-2. Apex `A` records (delete other apex `A`/`ALIAS` records first):
-   - `185.199.108.153`
-   - `185.199.109.153`
-   - `185.199.110.153`
-   - `185.199.111.153`
-3. `CNAME` for `www` → `<github-username>.github.io.` (note the trailing dot).
-4. Save. Propagation usually finishes in under an hour but can take up to 48.
+```bash
+echo "varnofitness.com" > public/CNAME
+git add public/CNAME
+git commit -m "Bind GitHub Pages to varnofitness.com"
+git push
+```
 
-### 7) HTTPS
+### 3. Set the custom domain on Pages
 
-- After DNS propagates, GitHub issues a Let's Encrypt cert automatically.
-- Repo → **Settings → Pages → Enforce HTTPS** (tick the box once it is available).
+```bash
+./.gh-bin/gh api -X PUT repos/mrugesh1989/varno-fitness-web/pages -f cname=varnofitness.com
+```
 
-### 8) Email (Gmail) unchanged
+### 4. Update DNS at GoDaddy
 
-- If you only use **varnofitness@gmail.com**, you typically **do not** change **MX** records when moving the website.
-- If you later use **Google Workspace / Microsoft 365** on `@varnofitness.com`, follow **their** MX setup carefully so you do not break mail.
+- Remove old Website Builder / parking records.
+- Apex `A` records (host: `@`, TTL: 600 s):
+  ```text
+  185.199.108.153
+  185.199.109.153
+  185.199.110.153
+  185.199.111.153
+  ```
+- `CNAME` on `www` → `mrugesh1989.github.io.` (trailing dot).
+- Leave **MX** records alone so Gmail keeps working.
+
+Propagation typically takes 10–60 minutes. GitHub auto-issues a Let's Encrypt cert once DNS resolves.
+
+### 5. Confirm HTTPS
+
+In the repo: **Settings → Pages → Enforce HTTPS** (tick once available).
 
 ---
 
@@ -108,10 +139,10 @@ npx serve out
 
 | Issue | What to check |
 |-------|----------------|
-| `localhost:3000` won’t load | Terminal shows `Ready`; no other app on port 3000; correct folder. |
-| Form says “not configured” | `NEXT_PUBLIC_WEB3FORMS_KEY` missing in `.env.local` (locally) or in GitHub Actions secrets (in production). |
+| `localhost:3000` won't load | Terminal shows `Ready`; no other app on port 3000; correct folder. |
+| Form says "not configured" | `NEXT_PUBLIC_WEB3FORMS_KEY` missing in `.env.local` (locally) or in GitHub Actions secrets (in production). |
 | Form returns an error in production | Web3Forms dashboard → check submissions; verify the inbox is confirmed and not over the daily rate limit. |
-| Domain still shows old GoDaddy site | DNS still points to GoDaddy / old A records; remove Website Builder DNS. |
-| Domain shows GitHub Pages but “Page not found” | `public/CNAME` missing, or repo Settings → Pages still points to a different source. |
-| Build fails on Actions | Look at the `Build (Next.js static export)` step log; common cause is missing `NEXT_PUBLIC_WEB3FORMS_KEY` secret or a syntax error in code. |
-| **`ENOENT` … `.next/server/vendor-chunks/...`** | Stale or partial build cache. Stop `npm run dev`, run `rm -rf .next`, then `npm run dev` again. |
+| 404 on internal navigation at the github.io URL | `NEXT_PUBLIC_BASE_PATH` not set in the workflow, or stale build. Re-run the workflow. |
+| Images appear broken on the github.io URL | `media.ts` `BASE_PATH` not prefixing — check `NEXT_PUBLIC_BASE_PATH` is `/varno-fitness-web` in the workflow. |
+| Build fails on Actions | Look at the `Build (Next.js static export)` step log. |
+| **`ENOENT` … `.next/server/vendor-chunks/...`** | Stale local cache. Stop `npm run dev`, run `rm -rf .next`, then `npm run dev` again. |
