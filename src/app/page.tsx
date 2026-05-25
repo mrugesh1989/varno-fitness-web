@@ -115,13 +115,15 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8">
-              <Image
-                src={media.partnerLogo}
-                alt={`${site.partner.name} logo`}
-                width={510}
-                height={132}
-                className="h-12 w-auto shrink-0 sm:h-14"
-              />
+              <div className="inline-flex shrink-0 items-center justify-center rounded-lg bg-white p-3 shadow-md ring-1 ring-black/5">
+                <Image
+                  src={media.partnerLogo}
+                  alt={`${site.partner.name} logo`}
+                  width={510}
+                  height={132}
+                  className="h-12 w-auto sm:h-14"
+                />
+              </div>
               <div>
                 <h2 className="font-display text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl">
                   Partnered with {site.partner.name}
