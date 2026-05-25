@@ -105,20 +105,11 @@ export default function SchedulePage() {
       </section>
 
       <p className="mt-10 text-xs text-stone-500">
-        Times mirror the official schedule published by our partner{" "}
-        <a
-          href={site.partner.scheduleUrl}
-          target="_blank"
-          rel="noreferrer noopener"
-          className="text-stone-400 underline-offset-2 hover:underline"
-        >
-          {site.partner.name}
-        </a>
-        . Holidays and weather may affect specific classes—call{" "}
+        Holidays and weather may affect specific classes—call{" "}
         <a href={`tel:${site.phoneTel}`} className="text-stone-400 hover:underline">
           {site.phoneDisplay}
         </a>{" "}
-        to confirm.
+        to confirm before you head over.
       </p>
     </div>
   );

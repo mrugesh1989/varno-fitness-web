@@ -8,7 +8,7 @@ export const site = {
   name: "Varno Fitness",
   tagline: "The place where we meet you where you are",
   description:
-    "Hybrid training in Atlantic Highlands: group classes, private coaching, and youth fitness—partnered with Isabella Fitness.",
+    "Hybrid training in Atlantic Highlands: group classes, private coaching, and youth fitness with assessment-first coaching.",
   url: SITE_URL,
   phoneDisplay: "(732) 977-2916",
   phoneTel: "+17329772916",
@@ -27,11 +27,6 @@ export const site = {
   ],
   social: {
     facebook: "https://www.facebook.com/239679189230827",
-  },
-  partner: {
-    name: "Isabella Fitness",
-    url: "https://isabellafitness.com/",
-    scheduleUrl: "https://isabellafitness.com/varno-fitness/",
   },
   kids: {
     phoneDisplay: "(732) 208-8942",

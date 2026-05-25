@@ -84,7 +84,10 @@ export default function HomePage() {
               {[
                 { label: "Assessment-first", value: "Personal roadmap before class" },
                 { label: "Hybrid training", value: "Strength · HIIT · conditioning" },
-                { label: "Partner network", value: site.partner.name },
+                {
+                  label: `${site.google.rating.toFixed(1)} ★ on Google`,
+                  value: `${site.google.reviewCount} member reviews`,
+                },
               ].map((item) => (
                 <div
                   key={item.label}
@@ -107,41 +110,6 @@ export default function HomePage() {
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="rounded-2xl border border-white/10 object-cover object-center shadow-2xl shadow-black/40"
             />
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-white/10 bg-brand-surface/50 py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8">
-              <div className="inline-flex shrink-0 items-center justify-center rounded-lg bg-white p-3 shadow-md ring-1 ring-black/5">
-                <Image
-                  src={media.partnerLogo}
-                  alt={`${site.partner.name} logo`}
-                  width={510}
-                  height={132}
-                  className="h-12 w-auto sm:h-14"
-                />
-              </div>
-              <div>
-                <h2 className="font-display text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl">
-                  Partnered with {site.partner.name}
-                </h2>
-                <p className="mt-3 max-w-2xl text-stone-400">
-                  Same coaching philosophy and program rigor you expect from the leading hybrid gym
-                  in the region—rooted in community, safety, and results.
-                </p>
-              </div>
-            </div>
-            <a
-              href={site.partner.url}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex w-fit shrink-0 items-center rounded-md border border-white/15 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/5"
-            >
-              Visit {site.partner.name}
-            </a>
           </div>
         </div>
       </section>

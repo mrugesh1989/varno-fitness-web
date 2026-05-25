@@ -37,19 +37,6 @@ export default function AboutPage() {
             are today. Hybrid training—strength, HIIT, and conditioning—lets us build resilient
             athletes without sacrificing form or fun.
           </p>
-          <p className="mt-6 text-lg leading-relaxed text-stone-300">
-            We are proud partners of{" "}
-            <a
-              href={site.partner.url}
-              target="_blank"
-              rel="noreferrer"
-              className="font-semibold text-brand-accentHover underline-offset-4 hover:underline"
-            >
-              {site.partner.name}
-            </a>
-            , sharing the same commitment to community and results across Sayreville and Atlantic
-            Highlands.
-          </p>
           <h2 className="mt-10 text-sm font-semibold uppercase tracking-wide text-brand-accent">
             Hours
           </h2>

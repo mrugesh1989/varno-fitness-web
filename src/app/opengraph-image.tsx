@@ -45,7 +45,7 @@ export default function OpenGraphImage() {
           </div>
         </div>
         <div style={{ fontSize: 22, color: "#a8a29e" }}>
-          Partnered with Isabella Fitness
+          {`${site.google.rating.toFixed(1)} ★ on Google · ${site.google.reviewCount} reviews`}
         </div>
       </div>
     ),

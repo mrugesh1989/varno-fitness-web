@@ -21,18 +21,6 @@ export function Footer() {
             <p className="font-display text-2xl text-white">{site.name}</p>
           </div>
           <p className="mt-2 max-w-sm text-sm text-stone-400">{site.tagline}</p>
-          <p className="mt-4 text-sm text-stone-400">
-            Partnered with{" "}
-            <a
-              href={site.partner.url}
-              className="font-medium text-brand-accentHover underline-offset-4 hover:underline"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {site.partner.name}
-            </a>
-            .
-          </p>
         </div>
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-stone-500">
