@@ -47,6 +47,65 @@ export const site = {
   },
 } as const;
 
+export const schedule = [
+  {
+    day: "Monday",
+    classes: [
+      { name: "VF60 Group Fitness", time: "5:15 AM" },
+      { name: "VF60 Group Fitness", time: "6:20 AM" },
+      { name: "VF60 Group Fitness", time: "8:30 AM" },
+      { name: "VF60 Group Fitness", time: "5:20 PM" },
+      { name: "VF60 Group Fitness", time: "6:30 PM" },
+    ],
+  },
+  {
+    day: "Tuesday",
+    classes: [
+      { name: "VF60 Group Fitness", time: "5:15 AM" },
+      { name: "VF60 Group Fitness", time: "6:20 AM" },
+      { name: "VF60 Group Fitness", time: "8:30 AM" },
+      { name: "VF60 Group Fitness", time: "4:00 PM" },
+      { name: "VF60 Group Fitness", time: "5:20 PM" },
+      { name: "VF60 Group Fitness", time: "6:30 PM" },
+    ],
+  },
+  {
+    day: "Wednesday",
+    classes: [
+      { name: "VF60 Group Fitness", time: "5:15 AM" },
+      { name: "VF60 Group Fitness", time: "6:20 AM" },
+      { name: "VF60 Group Fitness", time: "8:30 AM" },
+      { name: "VF60 Group Fitness", time: "5:20 PM" },
+      { name: "VF60 Group Fitness", time: "6:30 PM" },
+    ],
+  },
+  {
+    day: "Thursday",
+    classes: [
+      { name: "VF60 Group Fitness", time: "5:15 AM" },
+      { name: "VF60 Group Fitness", time: "6:20 AM" },
+      { name: "VF60 Group Fitness", time: "8:30 AM" },
+      { name: "VF60 Group Fitness", time: "4:00 PM" },
+      { name: "VF60 Fundamentals", time: "5:20 PM" },
+    ],
+  },
+  {
+    day: "Friday",
+    classes: [
+      { name: "VF60 Group Fitness", time: "5:15 AM" },
+      { name: "VF60 Group Fitness", time: "6:20 AM" },
+      { name: "VF60 Group Fitness", time: "8:30 AM" },
+      { name: "VF60 Group Fitness", time: "4:00 PM" },
+      { name: "VF60 Group Fitness", time: "5:20 PM" },
+    ],
+  },
+  {
+    day: "Saturday",
+    classes: [{ name: "VF60 Group Fitness", time: "8:00 AM" }],
+  },
+  { day: "Sunday", classes: [] },
+] as const;
+
 export const programs = [
   {
     slug: "group",
