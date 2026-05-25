@@ -1,4 +1,4 @@
-import { site } from "@/content/site";
+import { site, testimonials } from "@/content/site";
 
 /** LocalBusiness + Organization structured data for SEO. */
 export function SiteJsonLd() {
@@ -38,7 +38,25 @@ export function SiteJsonLd() {
         closes: "09:30",
       },
     ],
-    sameAs: [site.social.facebook],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: site.google.rating,
+      reviewCount: site.google.reviewCount,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    review: testimonials.map((t) => ({
+      "@type": "Review",
+      author: { "@type": "Person", name: t.name },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: t.rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      reviewBody: t.quote,
+    })),
+    sameAs: [site.social.facebook, site.google.mapsUrl],
   };
 
   return (

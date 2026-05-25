@@ -39,6 +39,12 @@ export const site = {
     schedule: "Monday & Wednesday at 4:00 PM",
     price: "$50/month",
   },
+  google: {
+    rating: 5.0,
+    reviewCount: 112,
+    mapsUrl: "https://www.google.com/maps?cid=8570623822143094516",
+    writeReviewUrl: "https://www.google.com/maps?cid=8570623822143094516",
+  },
 } as const;
 
 export const programs = [
@@ -81,20 +87,37 @@ export const programs = [
 export const testimonials = [
   {
     quote:
-      "Coaches meet you at your level and push you safely. The assessment-first approach made all the difference.",
-    name: "Varno member",
-    role: "Group + private",
+      "If you're looking for more than just a gym, Varno Fitness is the place to be. From day one, what really stood out to me was the incredible sense of community—everyone is welcoming, supportive, and genuinely invested in each other.",
+    name: "Lisa",
+    when: "2 months ago",
+    rating: 5,
   },
   {
     quote:
-      "Programming is challenging but never careless. Community here feels like teammates, not competition.",
-    name: "Atlantic Highlands local",
-    role: "VF Group",
+      "I joined Varno Fitness a year ago to get back into shape and relieve stress, but it quickly became so much more than a gym. The community here is incredible—it truly feels like a second family, not just for me but for my whole family.",
+    name: "Jennifer Vespa",
+    when: "2 months ago",
+    rating: 5,
   },
   {
     quote:
-      "Finally a gym that explains the why behind the work. I show up knowing what each block is for.",
-    name: "Early morning regular",
-    role: "VF Group",
+      "The best gym in the world. The classes are well written and structured, the coaches are extremely knowledgeable, the equipment is plentiful, and the community is unlike any other I've seen.",
+    name: "Ashley Wetstein",
+    when: "2 months ago",
+    rating: 5,
+  },
+  {
+    quote:
+      "After a 10 year hiatus, Varno Fitness got me back in the gym! Strategic programming, meticulous coaches, and a welcoming community—top tier across the board. Truly the best hour of your day.",
+    name: "Kaylynn Diaz",
+    when: "a year ago",
+    rating: 5,
+  },
+  {
+    quote:
+      "Excellent, fully equipped gym with great trainers. Kevin and Matt are awesome—they're getting me back in shape and they make every member feel known. Highly recommended.",
+    name: "Thomas Routson",
+    when: "2 months ago",
+    rating: 5,
   },
 ] as const;

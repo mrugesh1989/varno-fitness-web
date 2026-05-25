@@ -9,6 +9,29 @@ export const metadata: Metadata = {
   description: site.description,
 };
 
+function StarRow({ value, small = false }: { value: number; small?: boolean }) {
+  const size = small ? "h-4 w-4" : "h-5 w-5";
+  return (
+    <div
+      className="flex items-center gap-0.5"
+      role="img"
+      aria-label={`${value.toFixed(1)} out of 5 stars`}
+    >
+      {[0, 1, 2, 3, 4].map((i) => (
+        <svg
+          key={i}
+          className={`${size} ${i < Math.round(value) ? "text-amber-400" : "text-stone-700"}`}
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d="M9.05 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.367 2.447a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.539 1.118L10.588 15.5a1 1 0 00-1.176 0l-3.367 2.447c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.062 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69L9.05 2.927z" />
+        </svg>
+      ))}
+    </div>
+  );
+}
+
 export default function HomePage() {
   return (
     <>
@@ -190,22 +213,61 @@ export default function HomePage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-        <h2 className="font-display text-3xl font-bold uppercase tracking-wide text-white">
-          What athletes say
-        </h2>
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-accent">
+              5-star reviews on Google
+            </p>
+            <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl">
+              What our members say
+            </h2>
+          </div>
+          <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.04] px-5 py-3">
+            <StarRow value={site.google.rating} />
+            <div className="text-sm">
+              <p className="font-semibold text-white">
+                {site.google.rating.toFixed(1)} on Google
+              </p>
+              <p className="text-stone-400">{site.google.reviewCount} reviews</p>
+            </div>
+          </div>
+        </div>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {testimonials.map((t) => (
             <blockquote
               key={t.name}
-              className="rounded-xl border border-white/10 bg-white/[0.02] p-6"
+              className="flex flex-col rounded-xl border border-white/10 bg-white/[0.02] p-6"
             >
-              <p className="text-sm leading-relaxed text-stone-300">&ldquo;{t.quote}&rdquo;</p>
+              <StarRow value={t.rating} small />
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-stone-300">
+                &ldquo;{t.quote}&rdquo;
+              </p>
               <footer className="mt-4 text-xs text-stone-500">
                 <cite className="not-italic font-semibold text-stone-400">{t.name}</cite>
-                <span className="text-stone-600"> · {t.role}</span>
+                <span className="text-stone-600"> · {t.when} · via Google</span>
               </footer>
             </blockquote>
           ))}
+        </div>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <a
+            href={site.google.mapsUrl}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="inline-flex items-center gap-2 rounded-md border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/5"
+          >
+            Read all {site.google.reviewCount} reviews on Google
+            <span aria-hidden>→</span>
+          </a>
+          <a
+            href={site.google.writeReviewUrl}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="inline-flex items-center gap-2 rounded-md bg-brand-accent px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-accentHover"
+          >
+            Leave us a Google review
+            <span aria-hidden>★</span>
+          </a>
         </div>
       </section>
 
