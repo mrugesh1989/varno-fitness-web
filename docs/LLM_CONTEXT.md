@@ -11,9 +11,10 @@ with Isabella Fitness). Five public pages, exported as a fully static Next.js
 site, currently hosted on **GitHub Pages** at
 `https://mrugesh1989.github.io/varno-fitness-web/` (custom domain
 `varnofitness.com` is planned but DNS hasn't been switched yet). The contact
-form posts directly from the browser to **Web3Forms**, which emails
-submissions to `varnofitness@gmail.com`. There is no backend, database, auth,
-CMS, or e-commerce in this repository.
+form posts directly from the browser to **Formsubmit.co**, which emails
+submissions to `varnofitness@gmail.com` and sends an automatic confirmation
+back to the customer via the `_autoresponse` field. There is no backend,
+database, auth, CMS, or e-commerce in this repository.
 
 ## 2. Tech stack
 
@@ -23,7 +24,7 @@ CMS, or e-commerce in this repository.
 | UI | **React 19** + **TypeScript 5.7** |
 | Styling | **Tailwind CSS 3** (custom `brand.*` palette in `tailwind.config.ts`) |
 | Fonts | Google `Oswald` (display) + `DM_Sans` (body) via `next/font` |
-| Contact form | **Web3Forms** REST API (client-side `fetch`) |
+| Contact form | **Formsubmit.co** (`https://formsubmit.co/ajax/varnofitness@gmail.com`, client-side `fetch`, auto-reply via `_autoresponse`) |
 | Hosting | **GitHub Pages** via Actions workflow |
 | SEO | per-page `metadata`, JSON-LD (`SiteJsonLd`), dynamic OG image, `sitemap.ts`, `robots.ts` |
 | Lint | `eslint-config-next` (`next/core-web-vitals`) |
@@ -70,7 +71,7 @@ build — both were removed when the site moved to a static export.
 | `/`, `/programs`, `/schedule`, `/about`, `/contact`, `/not-found` | Static React pages prerendered into HTML | None |
 | `/sitemap.xml`, `/robots.txt` | Generated at build | None |
 | `/opengraph-image` | Generated at build | None |
-| Contact submission | Browser `POST` → `https://api.web3forms.com/submit` | Third-party (Web3Forms) |
+| Contact submission | Browser `POST` → `https://formsubmit.co/ajax/varnofitness@gmail.com` | Third-party (Formsubmit.co) |
 
 Everything in `out/` after `npm run build` is plain HTML/CSS/JS/images — safe
 for any static CDN.
@@ -88,7 +89,7 @@ for any static CDN.
 | Brand colors, fonts | `tailwind.config.ts`, `src/app/layout.tsx` |
 | Per-page SEO | `metadata` export inside each `page.tsx` |
 | Form fields | `src/components/ContactForm.tsx` |
-| Email recipient | Web3Forms dashboard (tied to the access key) |
+| Email recipient | The email in the POST URL inside `src/components/ContactForm.tsx` (currently `varnofitness@gmail.com`). Confirmed once by clicking the link Formsubmit sends on the first submission. |
 
 There is **no CMS** and **no database**. All copy ships in the bundle.
 
@@ -99,12 +100,11 @@ Read at build time, inlined into the static bundle. The workflow at
 
 | Var | Required? | Purpose |
 |-----|-----------|---------|
-| `NEXT_PUBLIC_WEB3FORMS_KEY` | yes (otherwise the form errors) | Web3Forms access key. Lives in repo secret `NEXT_PUBLIC_WEB3FORMS_KEY`. |
 | `NEXT_PUBLIC_BASE_PATH` | yes for GitHub project-page URL | Currently `/varno-fitness-web`. Set empty (or unset) when serving from a root domain like `varnofitness.com`. Drives `next.config.ts` basePath + asset prefix + the prefix applied to `/images/*` in `src/content/media.ts`. |
 | `NEXT_PUBLIC_SITE_URL` | yes | Canonical site URL; used for `<link rel="canonical">`, OG metadata, JSON-LD, sitemap, and robots. Default in code: the github.io URL. |
 
-The Web3Forms key is rate-limited per inbox by Web3Forms; exposing it in the
-client bundle is acceptable (same as Formspree/Web3Forms' documented usage).
+No form-related secrets exist. Formsubmit is keyless; the recipient email is
+embedded in the POST URL inside `src/components/ContactForm.tsx`.
 
 ## 7. Local commands
 
@@ -148,9 +148,10 @@ removing `output: "export"` from `next.config.ts` and choosing a Node host
 - No member login, scheduling, payments, or bookings inside the app.
 - No CMS, blog, or analytics wired in.
 - No tests; behavior is verified manually and via `npm run build` + `npm run lint`.
-- Schedule page intentionally links out to Isabella Fitness’s calendar.
-- No server-side captcha. Spam control is the Web3Forms `botcheck` honeypot;
-  add Web3Forms’ hCaptcha integration if spam becomes a problem.
+- Schedule page renders the weekly class grid inline from `src/content/site.ts` (still credits Isabella Fitness as the source of truth in a footer note).
+- No server-side captcha. Spam control is a hidden `_honey` honeypot field
+  (Formsubmit's built-in convention); add Formsubmit's reCAPTCHA / hCaptcha
+  fields if spam becomes a problem.
 
 ## 10. Coding conventions
 
@@ -158,6 +159,6 @@ removing `output: "export"` from `next.config.ts` and choosing a Node host
 - Tailwind utility classes; avoid ad-hoc CSS unless added to `globals.css`.
 - Import alias `@/*` → `src/*`.
 - Keep all copy in `src/content/site.ts`; do not hard-code strings in pages.
-- Anything that needs a secret beyond the public Web3Forms key must move to a
-  separate service (Cloudflare Worker, etc.) — it cannot live in this repo
-  because the site is static and shipped to the browser.
+- Anything that needs a real secret must move to a separate service
+  (Cloudflare Worker, etc.) — it cannot live in this repo because the site is
+  static and shipped to the browser.

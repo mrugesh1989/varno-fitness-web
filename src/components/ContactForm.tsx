@@ -3,11 +3,20 @@
 import { useId, useState } from "react";
 import { site } from "@/content/site";
 
-const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "";
-const endpoint = "https://api.web3forms.com/submit";
+const GYM_INBOX = "varnofitness@gmail.com";
+const endpoint = `https://formsubmit.co/ajax/${GYM_INBOX}`;
 
-type Web3FormsResponse = {
-  success?: boolean;
+const AUTORESPONSE = `Hi,
+
+Thanks for reaching out to ${site.name}! We've received your message and a coach will reply within one business day.
+
+If it is urgent, please call us at ${site.phoneDisplay}.
+
+— The ${site.name} team
+${site.address.street}, ${site.address.city}, ${site.address.state} ${site.address.postalCode}`;
+
+type FormsubmitResponse = {
+  success?: string | boolean;
   message?: string;
 };
 
@@ -21,37 +30,30 @@ export function ContactForm() {
     setStatus("sending");
     setErrorMessage(null);
 
-    if (!accessKey) {
-      setStatus("error");
-      setErrorMessage(
-        "Contact form is not configured. Set NEXT_PUBLIC_WEB3FORMS_KEY in the build environment."
-      );
-      return;
-    }
-
     const form = event.currentTarget;
     const fd = new FormData(form);
     const name = String(fd.get("name") ?? "").trim();
     const email = String(fd.get("email") ?? "").trim();
     const phone = String(fd.get("phone") ?? "").trim();
     const message = String(fd.get("message") ?? "").trim();
-    const botcheck = String(fd.get("botcheck") ?? "");
+    const honeypot = String(fd.get("_honey") ?? "");
 
-    if (botcheck) {
+    if (honeypot) {
       setStatus("success");
       form.reset();
       return;
     }
 
     const payload = {
-      access_key: accessKey,
-      subject: `Website inquiry from ${name || "anonymous"}`,
-      from_name: `${site.name} website`,
-      replyto: email,
       name,
       email,
       phone: phone || "(not provided)",
       message: message || "(no message body)",
+      _subject: `Website inquiry from ${name || "anonymous"}`,
+      _replyto: email,
+      _template: "table",
+      _captcha: "false",
+      _autoresponse: AUTORESPONSE,
     };
 
     try {
@@ -64,10 +66,13 @@ export function ContactForm() {
         body: JSON.stringify(payload),
       });
 
-      const data = (await res.json().catch(() => ({}))) as Web3FormsResponse;
-      if (!res.ok || !data.success) {
+      const data = (await res.json().catch(() => ({}))) as FormsubmitResponse;
+      const ok = res.ok && (data.success === true || data.success === "true");
+      if (!ok) {
         setStatus("error");
-        setErrorMessage(data.message ?? "Could not send message. Please try again.");
+        setErrorMessage(
+          data.message ?? "Could not send message. Please try again or call us."
+        );
         return;
       }
 
@@ -83,12 +88,13 @@ export function ContactForm() {
     <div>
       <form onSubmit={handleSubmit} className="space-y-5">
         <input
-          type="checkbox"
-          name="botcheck"
+          type="text"
+          name="_honey"
           tabIndex={-1}
+          autoComplete="off"
           aria-hidden="true"
           className="hidden"
-          defaultChecked={false}
+          defaultValue=""
         />
         <div>
           <label htmlFor={`${id}-name`} className="block text-sm font-medium text-stone-300">
@@ -149,7 +155,8 @@ export function ContactForm() {
       </form>
       {status === "success" ? (
         <p className="mt-4 text-sm font-medium text-emerald-400" role="status">
-          Thanks — we will get back to you shortly.
+          Thanks — we sent the gym your message and a confirmation to your inbox. A coach
+          will reply within one business day.
         </p>
       ) : null}
       {status === "error" && errorMessage ? (

@@ -15,7 +15,7 @@ Use this file to quickly understand **what exists** and **design decisions** wit
 - **React 19** + **TypeScript**.
 - **Tailwind CSS 3** — styling; custom `brand` palette in `tailwind.config.ts`.
 - **Fonts:** Google `Oswald` (headings) + `DM_Sans` (body) via `next/font` in `layout.tsx`.
-- **Contact form:** client-side POST → [Web3Forms](https://web3forms.com) → email to `varnofitness@gmail.com`. No backend / API routes in this repo.
+- **Contact form:** client-side POST → [Formsubmit.co](https://formsubmit.co) → email to `varnofitness@gmail.com` + auto-confirmation back to the customer. No backend / API routes in this repo.
 - **SEO:** per-page `metadata`, `SiteJsonLd` (ExerciseGym schema), `sitemap.ts`, `robots.ts`, dynamic `opengraph-image.tsx`.
 
 ## What was built
@@ -24,7 +24,7 @@ Use this file to quickly understand **what exists** and **design decisions** wit
 2. **Layout:** shared header/footer; dark “premium gym” aesthetic; orange accent.
 3. **Content:** centralized in `src/content/site.ts`; image paths in `src/content/media.ts`.
 4. **Assets:** `public/images/` — Varno mark/hero from legacy GoDaddy site; partner logo and program art from Isabella site for alignment (replaceable).
-5. **Forms:** client `ContactForm` posts directly to Web3Forms with the `NEXT_PUBLIC_WEB3FORMS_KEY` access key, includes a hidden `botcheck` honeypot.
+5. **Forms:** client `ContactForm` posts directly to `https://formsubmit.co/ajax/varnofitness@gmail.com`; uses `_autoresponse` for the customer confirmation and a hidden `_honey` field for spam control.
 6. **No CMS:** edit TypeScript content files (Sanity/Contentful could be added later).
 
 ## Important files (by concern)
@@ -35,7 +35,7 @@ Use this file to quickly understand **what exists** and **design decisions** wit
 | Image file names / program image mapping | `src/content/media.ts` |
 | Global SEO + icons + shell | `src/app/layout.tsx` |
 | Home layout | `src/app/page.tsx` |
-| Contact form (Web3Forms client) | `src/components/ContactForm.tsx` |
+| Contact form (Formsubmit client) | `src/components/ContactForm.tsx` |
 | Nav / logo | `src/components/Header.tsx` |
 | Static export config | `next.config.ts` |
 | Pages deploy workflow | `.github/workflows/deploy.yml` |
@@ -46,7 +46,7 @@ Use this file to quickly understand **what exists** and **design decisions** wit
 - Member login, scheduling inside this app (schedule links to Isabella-hosted page).
 - Blog/CMS, payment, class booking.
 - Plausible/GA4 (can add script via `layout.tsx` or third-party component).
-- Server-side captcha (Turnstile removed when the API route was dropped; Web3Forms’ honeypot is the current spam control).
+- Server-side captcha (Turnstile removed when the API route was dropped; a Formsubmit `_honey` honeypot is the current spam control).
 
 ## Environment variables (production)
 

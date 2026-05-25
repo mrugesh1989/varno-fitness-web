@@ -5,7 +5,7 @@
 ### Prerequisites
 
 - **Node.js** (includes `npm`). Install via [nodejs.org](https://nodejs.org/) or Homebrew: `brew install node`.
-- A **Web3Forms** access key (free, https://web3forms.com) tied to `varnofitness@gmail.com`. Without it the form will display a configuration error.
+- A working inbox at `varnofitness@gmail.com`. The contact form posts to [Formsubmit.co](https://formsubmit.co), which delivers submissions there. On the very first submission Formsubmit emails the inbox a one-click "confirm this address" link — do it once and every later submission flows through.
 
 ### Steps
 
@@ -18,17 +18,11 @@
    ```bash
    npm install
    ```
-4. Copy env template and paste the Web3Forms key:
-   ```bash
-   cp .env.example .env.local
-   # then edit .env.local:
-   # NEXT_PUBLIC_WEB3FORMS_KEY=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-   ```
-5. Start the dev server:
+4. Start the dev server:
    ```bash
    npm run dev
    ```
-6. In a browser, open **http://localhost:3000**.
+5. In a browser, open **http://localhost:3000**.
    - From another device on the same Wi-Fi, use the "Network" URL printed in the terminal (e.g. `http://192.168.x.x:3000`).
 
 ### Useful commands
@@ -62,7 +56,7 @@ The repo `mrugesh1989/varno-fitness-web` is already wired up:
 - **Build-time env vars (set inside the workflow):**
   - `NEXT_PUBLIC_BASE_PATH=/varno-fitness-web`
   - `NEXT_PUBLIC_SITE_URL=https://mrugesh1989.github.io/varno-fitness-web`
-  - `NEXT_PUBLIC_WEB3FORMS_KEY` — pulled from repo secret of the same name.
+- **No form-related secrets.** Formsubmit is keyless; the recipient address lives in `src/components/ContactForm.tsx`.
 
 To redeploy after a change:
 
@@ -74,12 +68,11 @@ git push
 ./.gh-bin/gh workflow run "Deploy to GitHub Pages"
 ```
 
-### Add or rotate the Web3Forms key
+### Change the contact-form recipient
 
-```bash
-./.gh-bin/gh secret set NEXT_PUBLIC_WEB3FORMS_KEY --body 'your-access-key'
-./.gh-bin/gh workflow run "Deploy to GitHub Pages"
-```
+1. Edit the `GYM_INBOX` constant at the top of `src/components/ContactForm.tsx`.
+2. Commit, push, and redeploy.
+3. After the first submission to the new address, click the "confirm this email" link Formsubmit sends to that inbox. From that moment on, both the gym notification and the customer auto-response work for the new recipient.
 
 ---
 
@@ -93,7 +86,6 @@ In `.github/workflows/deploy.yml`, either delete both env vars or set them to th
 
 ```yaml
 env:
-  NEXT_PUBLIC_WEB3FORMS_KEY: ${{ secrets.NEXT_PUBLIC_WEB3FORMS_KEY }}
   # Both vars empty = build for an apex/root deployment.
   NEXT_PUBLIC_BASE_PATH: ""
   NEXT_PUBLIC_SITE_URL: https://varnofitness.com
@@ -140,8 +132,8 @@ In the repo: **Settings → Pages → Enforce HTTPS** (tick once available).
 | Issue | What to check |
 |-------|----------------|
 | `localhost:3000` won't load | Terminal shows `Ready`; no other app on port 3000; correct folder. |
-| Form says "not configured" | `NEXT_PUBLIC_WEB3FORMS_KEY` missing in `.env.local` (locally) or in GitHub Actions secrets (in production). |
-| Form returns an error in production | Web3Forms dashboard → check submissions; verify the inbox is confirmed and not over the daily rate limit. |
+| Form submits but no email arrives at the gym inbox | First submission requires the gym inbox owner to click the "confirm this email" link from Formsubmit. Check spam. |
+| Form returns an error in production | Browser devtools → Network → look at the POST to `formsubmit.co`. Common causes: ad-blocker, rate limiting, or unverified recipient. |
 | 404 on internal navigation at the github.io URL | `NEXT_PUBLIC_BASE_PATH` not set in the workflow, or stale build. Re-run the workflow. |
 | Images appear broken on the github.io URL | `media.ts` `BASE_PATH` not prefixing — check `NEXT_PUBLIC_BASE_PATH` is `/varno-fitness-web` in the workflow. |
 | Build fails on Actions | Look at the `Build (Next.js static export)` step log. |

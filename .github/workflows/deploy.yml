@@ -32,7 +32,6 @@ jobs:
 
       - name: Build (Next.js static export)
         env:
-          NEXT_PUBLIC_WEB3FORMS_KEY: ${{ secrets.NEXT_PUBLIC_WEB3FORMS_KEY }}
           # GitHub Pages project-page URL. When moving to the custom domain
           # (varnofitness.com), clear both vars and restore public/CNAME.
           NEXT_PUBLIC_BASE_PATH: /varno-fitness-web

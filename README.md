@@ -1,6 +1,6 @@
 # Varno Fitness — website
 
-Modern marketing site for **Varno Fitness** (Atlantic Highlands, NJ), aligned with partner brand [Isabella Fitness](https://isabellafitness.com/). Built with **Next.js 15** (App Router), **TypeScript**, **Tailwind CSS**, exported as a fully static site, and hosted on **GitHub Pages**. Contact-form submissions are delivered to `varnofitness@gmail.com` via [Web3Forms](https://web3forms.com).
+Modern marketing site for **Varno Fitness** (Atlantic Highlands, NJ), aligned with partner brand [Isabella Fitness](https://isabellafitness.com/). Built with **Next.js 15** (App Router), **TypeScript**, **Tailwind CSS**, exported as a fully static site, and hosted on **GitHub Pages**. Contact-form submissions are delivered to `varnofitness@gmail.com` via [Formsubmit.co](https://formsubmit.co), which also auto-emails the customer a confirmation.
 
 **Live URL:** https://mrugesh1989.github.io/varno-fitness-web/
 **Repository:** https://github.com/mrugesh1989/varno-fitness-web
@@ -39,7 +39,7 @@ Open **http://localhost:3000** in your browser. For more detail and troubleshoot
 
 See [`.env.example`](.env.example).
 
-- **`NEXT_PUBLIC_WEB3FORMS_KEY`** — Access key from [Web3Forms](https://web3forms.com). The form POSTs directly to `https://api.web3forms.com/submit`; the key is rate-limited per inbox and is safe to ship in the client bundle. The key must also be added to GitHub Actions secrets so production builds receive it.
+- **No secret env vars are required.** The contact form posts directly to `https://formsubmit.co/ajax/varnofitness@gmail.com` and the gym inbox must be **confirmed once** by clicking the link Formsubmit emails on the first submission. To hide the gym email from the public bundle later, swap the URL in `src/components/ContactForm.tsx` for the random hash Formsubmit issues after verification (e.g. `https://formsubmit.co/ajax/abc123…`).
 
 ## Deploy
 
@@ -47,7 +47,7 @@ Every push to `main` builds the static export and publishes it via the workflow 
 
 ### Email note
 
-If you keep using **Gmail** (`varnofitness@gmail.com`), changing web DNS does not affect mail. Web3Forms delivers to that inbox directly via SMTP. If you later use **Google Workspace** / **Microsoft 365** on `@varnofitness.com`, add **MX** records per their docs and avoid removing MX when editing **A** records.
+If you keep using **Gmail** (`varnofitness@gmail.com`), changing web DNS does not affect mail. Formsubmit relays directly to that inbox. If you later use **Google Workspace** / **Microsoft 365** on `@varnofitness.com`, add **MX** records per their docs and avoid removing MX when editing **A** records.
 
 ## Content and images
 

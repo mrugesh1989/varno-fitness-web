@@ -70,6 +70,6 @@ Each `page.tsx` is a **route**. `layout.tsx` wraps all pages. Special files gene
 | Change home layout or sections | `src/app/page.tsx` |
 | Change nav links or header | `src/components/Header.tsx` |
 | Change footer | `src/components/Footer.tsx` |
-| Change form fields or recipient | `src/components/ContactForm.tsx` (fields) + Web3Forms dashboard (recipient is tied to the access key) |
+| Change form fields or recipient | `src/components/ContactForm.tsx` — fields live in the JSX, and the recipient email is the address inside the Formsubmit URL at the top of the file. Changing the recipient requires confirming the new address by clicking the link Formsubmit emails on the first submission. |
 | Change page titles for Google | `metadata` export in each `page.tsx` and/or `layout.tsx` |
 | Change brand colors / fonts | `tailwind.config.ts`, `src/app/globals.css`, `src/app/layout.tsx` (fonts) |

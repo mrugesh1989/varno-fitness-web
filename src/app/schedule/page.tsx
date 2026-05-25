@@ -45,7 +45,7 @@ export default function SchedulePage() {
             </h2>
             <ul className="mt-4 flex-1 space-y-3">
               {d.classes.length === 0 ? (
-                <li className="text-sm text-stone-500">Rest day</li>
+                <li className="text-sm text-stone-500">MISC</li>
               ) : (
                 d.classes.map((c, i) => (
                   <li
