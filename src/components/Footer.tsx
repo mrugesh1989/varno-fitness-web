@@ -59,10 +59,18 @@ export function Footer() {
             <a
               href={site.social.facebook}
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
               className="text-sm font-medium text-stone-300 hover:text-white"
             >
               Facebook
+            </a>
+            <a
+              href={site.social.instagram}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="text-sm font-medium text-stone-300 hover:text-white"
+            >
+              Instagram
             </a>
             <Link href="/contact" className="text-sm font-medium text-stone-300 hover:text-white">
               Contact form

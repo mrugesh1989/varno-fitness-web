@@ -27,6 +27,7 @@ export const site = {
   ],
   social: {
     facebook: "https://www.facebook.com/239679189230827",
+    instagram: "https://www.instagram.com/varno_fitness_/",
   },
   kids: {
     phoneDisplay: "(732) 208-8942",

@@ -56,7 +56,7 @@ export function SiteJsonLd() {
       },
       reviewBody: t.quote,
     })),
-    sameAs: [site.social.facebook, site.google.mapsUrl],
+    sameAs: [site.social.facebook, site.social.instagram, site.google.mapsUrl],
   };
 
   return (
