@@ -96,7 +96,10 @@ export const schedule = [
   },
   {
     day: "Saturday",
-    classes: [{ name: "VF60 Group Fitness", time: "8:00 AM" }],
+    classes: [
+      { name: "VF60 Group Fitness", time: "8:00 AM" },
+      { name: "VF60 Group Fitness", time: "9:00 AM" },
+    ],
   },
   { day: "Sunday", classes: [] },
 ] as const;
