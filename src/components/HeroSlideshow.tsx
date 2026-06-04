@@ -19,9 +19,9 @@ export function HeroSlideshow() {
   }, []);
 
   return (
-    <div className="relative w-full">
+    <div className="relative h-full w-full">
       <div
-        className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/40"
+        className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/40 lg:aspect-auto lg:h-full lg:min-h-[30rem]"
         role="group"
         aria-roledescription="carousel"
         aria-label="Inside Varno Fitness"

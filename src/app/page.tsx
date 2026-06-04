@@ -26,7 +26,7 @@ export default function HomePage() {
               "radial-gradient(ellipse 80% 50% at 50% -20%, rgba(234,88,12,0.35), transparent), radial-gradient(ellipse 60% 40% at 100% 0%, rgba(217,119,6,0.2), transparent)",
           }}
         />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2 lg:gap-14 lg:py-28">
+        <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2 lg:items-stretch lg:gap-14 lg:py-28">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-accent">
               Atlantic Highlands, NJ
@@ -52,7 +52,7 @@ export default function HomePage() {
                 View programs
               </Link>
             </div>
-            <div className="mt-12 grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+            <div className="mt-12 grid gap-4 sm:grid-cols-2">
               {[
                 { label: "Assessment-first", value: "Personal roadmap before class" },
                 { label: "Hybrid training", value: "Strength · HIIT · conditioning" },
@@ -71,16 +71,18 @@ export default function HomePage() {
                   <p className="mt-2 text-sm text-stone-300">{item.value}</p>
                 </div>
               ))}
+              <div className="rounded-lg border border-white/10 bg-white/[0.03] p-5">
+                <p className="text-xs font-semibold uppercase tracking-wide text-brand-accent">
+                  Follow us
+                </p>
+                <div className="mt-3">
+                  <SocialLinks />
+                </div>
+              </div>
             </div>
           </div>
-          <div className="mx-auto flex w-full max-w-xl flex-col gap-5 lg:max-w-none">
+          <div className="mx-auto w-full max-w-xl lg:h-full lg:max-w-none">
             <HeroSlideshow />
-            <div className="flex flex-wrap items-center justify-center gap-4 sm:justify-between">
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
-                Follow us
-              </span>
-              <SocialLinks />
-            </div>
           </div>
         </div>
       </section>
