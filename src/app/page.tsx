@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { AmenitiesSection } from "@/components/AmenitiesSection";
-import { GallerySection } from "@/components/GallerySection";
 import { GettingStartedSection } from "@/components/GettingStartedSection";
 import { GoogleReviewsSection } from "@/components/GoogleReviewsSection";
+import { HeroSlideshow } from "@/components/HeroSlideshow";
 import { SocialLinks } from "@/components/SocialLinks";
 import { programCardImage, media } from "@/content/media";
 import { programs, site } from "@/content/site";
@@ -79,16 +79,7 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-          <div className="relative mx-auto aspect-[4/3] w-full max-w-xl lg:max-w-none lg:translate-y-2">
-            <Image
-              src={media.varnoHero}
-              alt="Varno Fitness training floor"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="rounded-2xl border border-white/10 object-cover object-center shadow-2xl shadow-black/40"
-            />
-          </div>
+          <HeroSlideshow />
         </div>
       </section>
 
@@ -139,7 +130,6 @@ export default function HomePage() {
       </section>
 
       <AmenitiesSection />
-      <GallerySection />
 
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
