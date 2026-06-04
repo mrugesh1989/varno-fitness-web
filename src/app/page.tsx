@@ -88,6 +88,30 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="relative overflow-hidden border-b border-white/10">
+        <div className="absolute inset-0">
+          <Image
+            src={media.gymFloor}
+            alt=""
+            fill
+            className="object-cover opacity-20"
+            sizes="100vw"
+            aria-hidden
+          />
+          <div className="absolute inset-0 bg-brand-dark/85" aria-hidden />
+        </div>
+        <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+          <h2 className="font-display text-3xl font-bold uppercase tracking-wide text-white">
+            Our mission
+          </h2>
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-stone-300">
+            At {site.name}, we empower you to reach your goals through personalized guidance—not
+            generic templates. Whether you are new, returning from time off, or leveling up, we meet
+            you where you are and build a plan that fits your life.
+          </p>
+        </div>
+      </section>
+
       <GettingStartedSection />
 
       <section className="border-y border-white/10 bg-brand-surface/40 py-16 sm:py-20">
@@ -135,30 +159,6 @@ export default function HomePage() {
       </section>
 
       <AmenitiesSection />
-
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src={media.gymFloor}
-            alt=""
-            fill
-            className="object-cover opacity-20"
-            sizes="100vw"
-            aria-hidden
-          />
-          <div className="absolute inset-0 bg-brand-dark/85" aria-hidden />
-        </div>
-        <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-          <h2 className="font-display text-3xl font-bold uppercase tracking-wide text-white">
-            Our mission
-          </h2>
-          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-stone-300">
-            At {site.name}, we empower you to reach your goals through personalized guidance—not
-            generic templates. Whether you are new, returning from time off, or leveling up, we meet
-            you where you are and build a plan that fits your life.
-          </p>
-        </div>
-      </section>
 
       <GoogleReviewsSection />
 
