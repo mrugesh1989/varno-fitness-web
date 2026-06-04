@@ -5,6 +5,7 @@ import { AmenitiesSection } from "@/components/AmenitiesSection";
 import { GallerySection } from "@/components/GallerySection";
 import { GettingStartedSection } from "@/components/GettingStartedSection";
 import { GoogleReviewsSection } from "@/components/GoogleReviewsSection";
+import { SocialLinks } from "@/components/SocialLinks";
 import { programCardImage, media } from "@/content/media";
 import { programs, site } from "@/content/site";
 
@@ -60,6 +61,12 @@ export default function HomePage() {
               >
                 View programs
               </Link>
+            </div>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
+                Follow us
+              </span>
+              <SocialLinks variant="buttons" />
             </div>
             <div className="mt-12 grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
               {[

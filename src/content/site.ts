@@ -66,12 +66,6 @@ export const gettingStarted = [
 
 export const amenities = [
   {
-    slug: "changing-rooms",
-    title: "Bathrooms & changing rooms",
-    description:
-      "Clean restrooms and changing areas so you can arrive, train, and get on with your day comfortably.",
-  },
-  {
     slug: "bodybuilding",
     title: "Functional bodybuilding space",
     description:
@@ -93,7 +87,19 @@ export const amenities = [
     slug: "assessment",
     title: "Assessment-first onboarding",
     description:
-      "Every athlete starts with a complimentary assessment so we never throw you into class cold.",
+      "Every athlete starts with an assessment so we never throw you into class cold.",
+  },
+  {
+    slug: "members-app",
+    title: "Members-only app",
+    description:
+      "Reserve classes, track your workouts, and stay connected with the community from your phone.",
+  },
+  {
+    slug: "changing-rooms",
+    title: "Bathrooms & changing rooms",
+    description:
+      "Clean restrooms and changing areas so you can arrive, train, and get on with your day comfortably.",
   },
 ] as const;
 

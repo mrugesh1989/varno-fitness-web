@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SocialLinks } from "@/components/SocialLinks";
 import { site } from "@/content/site";
 import { media } from "@/content/media";
 
@@ -55,24 +56,15 @@ export function Footer() {
               </li>
             ))}
           </ul>
-          <div className="mt-6 flex gap-4">
-            <a
-              href={site.social.facebook}
-              target="_blank"
-              rel="noreferrer noopener"
+          <p className="mt-6 text-sm font-semibold uppercase tracking-wide text-stone-500">
+            Follow us
+          </p>
+          <div className="mt-3 flex items-center gap-4">
+            <SocialLinks />
+            <Link
+              href="/contact"
               className="text-sm font-medium text-stone-300 hover:text-white"
             >
-              Facebook
-            </a>
-            <a
-              href={site.social.instagram}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="text-sm font-medium text-stone-300 hover:text-white"
-            >
-              Instagram
-            </a>
-            <Link href="/contact" className="text-sm font-medium text-stone-300 hover:text-white">
               Contact form
             </Link>
           </div>
