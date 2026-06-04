@@ -28,16 +28,6 @@ export default function HomePage() {
         />
         <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2 lg:gap-14 lg:py-28">
           <div>
-            <div className="mb-6">
-              <Image
-                src={media.varnoMark}
-                alt=""
-                width={420}
-                height={140}
-                priority
-                className="h-14 w-auto max-w-[min(280px,85vw)] sm:h-16"
-              />
-            </div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-accent">
               Atlantic Highlands, NJ
             </p>
