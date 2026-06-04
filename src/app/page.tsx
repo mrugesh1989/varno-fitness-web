@@ -74,7 +74,7 @@ export default function HomePage() {
                 { label: "Hybrid training", value: "Strength · HIIT · conditioning" },
                 {
                   label: `${site.google.rating.toFixed(1)} ★ on Google`,
-                  value: `${site.google.reviewCount} member reviews`,
+                  value: `${site.google.reviewCountDisplay} member reviews`,
                 },
               ].map((item) => (
                 <div

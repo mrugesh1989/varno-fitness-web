@@ -102,7 +102,7 @@ export function GoogleReviewsSection() {
               <div className="text-left">
                 <StarRating value={site.google.rating} />
                 <p className="mt-1 text-sm text-stone-400">
-                  {site.google.reviewCount} Google reviews
+                  {site.google.reviewCountDisplay} Google reviews
                 </p>
               </div>
             </div>
@@ -141,7 +141,7 @@ export function GoogleReviewsSection() {
             rel="noreferrer noopener"
             className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/5"
           >
-            Read all {site.google.reviewCount} reviews
+            Read all {site.google.reviewCountDisplay} reviews
             <span aria-hidden>→</span>
           </a>
         </div>

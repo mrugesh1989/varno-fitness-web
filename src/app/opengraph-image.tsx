@@ -45,7 +45,7 @@ export default function OpenGraphImage() {
           </div>
         </div>
         <div style={{ fontSize: 22, color: "#a8a29e" }}>
-          {`${site.google.rating.toFixed(1)} ★ on Google · ${site.google.reviewCount} reviews`}
+          {`${site.google.rating.toFixed(1)} ★ on Google · ${site.google.reviewCountDisplay} reviews`}
         </div>
       </div>
     ),

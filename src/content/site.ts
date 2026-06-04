@@ -38,6 +38,7 @@ export const site = {
   google: {
     rating: 5.0,
     reviewCount: 112,
+    reviewCountDisplay: "100+",
     mapsUrl: "https://www.google.com/maps?cid=8570623822143094516",
     writeReviewUrl: "https://www.google.com/maps?cid=8570623822143094516",
   },
