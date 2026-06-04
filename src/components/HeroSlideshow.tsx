@@ -19,7 +19,7 @@ export function HeroSlideshow() {
   }, []);
 
   return (
-    <div className="relative mx-auto w-full max-w-xl lg:max-w-none lg:translate-y-2">
+    <div className="relative w-full">
       <div
         className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/40"
         role="group"
