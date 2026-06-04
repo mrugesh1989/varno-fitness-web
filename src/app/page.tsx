@@ -5,7 +5,6 @@ import { AmenitiesSection } from "@/components/AmenitiesSection";
 import { GallerySection } from "@/components/GallerySection";
 import { GettingStartedSection } from "@/components/GettingStartedSection";
 import { GoogleReviewsSection } from "@/components/GoogleReviewsSection";
-import { YouthHighlightSection } from "@/components/YouthHighlightSection";
 import { programCardImage, media } from "@/content/media";
 import { programs, site } from "@/content/site";
 
@@ -143,7 +142,6 @@ export default function HomePage() {
       </section>
 
       <AmenitiesSection />
-      <YouthHighlightSection />
       <GallerySection />
 
       <section className="relative overflow-hidden">

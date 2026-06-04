@@ -35,18 +35,6 @@ export const gallery = [
   { src: asset("/galary/IMG_9038.JPG"), alt: "Varno Fitness facility" },
 ] as const;
 
-/** Gallery images mapped to amenity cards by slug. */
-export const amenityImages: Record<string, string> = {
-  "changing-rooms": asset("/galary/IMG_9038.JPG"),
-  bodybuilding: asset("/galary/IMG_4934.jpeg"),
-  "kids-teens": asset("/galary/IMG_2077.jpeg"),
-  coaching: asset("/galary/IMG_6835.JPEG"),
-  equipment: asset("/galary/IMG_2083.jpeg"),
-  assessment: asset("/galary/9046ECD9-7332-42C1-A34B-23D02EC0ED46.JPG"),
-};
-
-export const youthSectionImage = asset("/galary/IMG_2077.jpeg");
-
 export function programCardImage(slug: string): string {
   switch (slug) {
     case "group":

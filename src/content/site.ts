@@ -78,10 +78,10 @@ export const amenities = [
       "Dedicated room for hypertrophy, accessory work, and strength building—beyond the main class floor.",
   },
   {
-    slug: "kids-teens",
-    title: "CrossFit Kids & teen classes",
+    slug: "kids",
+    title: "CrossFit Kids",
     description:
-      "Youth fitness in a coached, supportive environment. Ages and details confirmed when you enroll.",
+      "Kids fitness in a coached, supportive environment. Ages and details confirmed when you enroll.",
   },
   {
     slug: "coaching",
@@ -90,30 +90,12 @@ export const amenities = [
       "Certified coaches who scale every workout, teach proper form, and know your name.",
   },
   {
-    slug: "equipment",
-    title: "Top-of-the-line equipment",
-    description:
-      "Barbells, racks, conditioning tools, and plenty of space to move safely and efficiently.",
-  },
-  {
     slug: "assessment",
     title: "Assessment-first onboarding",
     description:
       "Every athlete starts with a complimentary assessment so we never throw you into class cold.",
   },
 ] as const;
-
-export const youthHighlight = {
-  title: "CrossFit Kids & teen classes",
-  subtitle: "Youth fitness at Varno",
-  description:
-    "Our kids and teen program builds strength, coordination, and confidence in a fun, coached setting. Sessions focus on fundamental movement, teamwork, and healthy habits that last.",
-  bullets: [
-    "Coached environment with attention to form and safety",
-    "Scalable workouts for different ages and abilities",
-    "Supportive community that keeps young athletes engaged",
-  ],
-} as const;
 
 export const schedule = [
   {
@@ -203,9 +185,9 @@ export const programs = [
   },
   {
     slug: "youth",
-    title: "Kids & Teen Classes",
+    title: "Kids Class",
     price: "$50/month",
-    summary: "CrossFit-style youth fitness in a supportive, coached environment.",
+    summary: "Kids fitness in a supportive, coached environment.",
     bullets: [
       `Held ${site.kids.schedule}.`,
       `Call ${site.kids.phoneDisplay} to learn more and enroll.`,
