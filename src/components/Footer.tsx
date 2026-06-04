@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { SocialLinks } from "@/components/SocialLinks";
 import { serviceAreas, site } from "@/content/site";
 import { media } from "@/content/media";
@@ -9,25 +8,6 @@ export function Footer() {
 
   return (
     <footer className="border-t border-white/10 bg-brand-surface">
-      <div className="border-b border-white/5 bg-brand-accent/10">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-8 sm:flex-row sm:px-6">
-          <div className="text-center sm:text-left">
-            <p className="font-display text-lg font-bold uppercase tracking-wide text-white">
-              Book your free assessment
-            </p>
-            <p className="mt-1 text-sm text-stone-400">
-              Complimentary fitness assessment — no obligation.
-            </p>
-          </div>
-          <Link
-            href="/contact"
-            className="shrink-0 rounded-md bg-brand-accent px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-accent/25 transition hover:bg-brand-accentHover"
-          >
-            Request free assessment
-          </Link>
-        </div>
-      </div>
-
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 lg:grid-cols-3">
         <div>
           <div className="flex items-center gap-3">
