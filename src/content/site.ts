@@ -52,9 +52,9 @@ export const gettingStarted = [
   },
   {
     step: 2,
-    title: "Try a coached class",
+    title: "Take a movement assessment",
     description:
-      "Experience VF60 group training or private coaching with loads and modifications scaled to you. Your coach guides every rep.",
+      "Work with a coach who reviews your movement, experience, and goals—so we can scale loads and modifications to keep you training safely and effectively.",
   },
   {
     step: 3,
