@@ -1,6 +1,5 @@
 /**
- * Static assets under /public/images.
- * Primary Varno logo: `varno_fitness_logo.webp` (replace file in /public/images to update site-wide).
+ * Static assets under /public/images and /public/galary.
  *
  * When the site is served from a sub-path (e.g. `/varno-fitness-web` on the
  * github.io URL), Next.js does not auto-prefix paths that come from raw string
@@ -20,6 +19,33 @@ export const media = {
   programPrivate: asset("/images/program-private.png"),
   programYouth: asset("/images/program-youth.png"),
 } as const;
+
+export const gallery = [
+  { src: asset("/galary/IMG_6722.JPG"), alt: "Varno Fitness training floor" },
+  { src: asset("/galary/IMG_6834.JPG"), alt: "Members training at Varno Fitness" },
+  { src: asset("/galary/IMG_6853.JPG"), alt: "Group class in session" },
+  { src: asset("/galary/IMG_9078.JPG"), alt: "Coached strength training" },
+  { src: asset("/galary/IMG_2083.jpeg"), alt: "Functional fitness equipment" },
+  { src: asset("/galary/IMG_3604.JPG"), alt: "Varno Fitness gym interior" },
+  { src: asset("/galary/IMG_5411.jpeg"), alt: "Athletes working out together" },
+  { src: asset("/galary/IMG_2415.JPG"), alt: "Community at Varno Fitness" },
+  { src: asset("/galary/IMG_4934.jpeg"), alt: "Weightlifting area" },
+  { src: asset("/galary/IMG_9551.jpeg"), alt: "Training space at Varno Fitness" },
+  { src: asset("/galary/IMG_0148.jpeg"), alt: "Members during a workout" },
+  { src: asset("/galary/IMG_9038.JPG"), alt: "Varno Fitness facility" },
+] as const;
+
+/** Gallery images mapped to amenity cards by slug. */
+export const amenityImages: Record<string, string> = {
+  "changing-rooms": asset("/galary/IMG_9038.JPG"),
+  bodybuilding: asset("/galary/IMG_4934.jpeg"),
+  "kids-teens": asset("/galary/IMG_2077.jpeg"),
+  coaching: asset("/galary/IMG_6835.JPEG"),
+  equipment: asset("/galary/IMG_2083.jpeg"),
+  assessment: asset("/galary/9046ECD9-7332-42C1-A34B-23D02EC0ED46.JPG"),
+};
+
+export const youthSectionImage = asset("/galary/IMG_2077.jpeg");
 
 export function programCardImage(slug: string): string {
   switch (slug) {

@@ -43,6 +43,78 @@ export const site = {
   },
 } as const;
 
+export const gettingStarted = [
+  {
+    step: 1,
+    title: "Schedule a free assessment",
+    description:
+      "Tell us your goals and history. We will meet you where you are and map out a plan that fits your life—not a generic template.",
+  },
+  {
+    step: 2,
+    title: "Try a coached class",
+    description:
+      "Experience VF60 group training or private coaching with loads and modifications scaled to you. Your coach guides every rep.",
+  },
+  {
+    step: 3,
+    title: "Join a supportive community",
+    description:
+      "Getting fit is hard; staying fit is harder. Our members and coaches keep you accountable, motivated, and having fun along the way.",
+  },
+] as const;
+
+export const amenities = [
+  {
+    slug: "changing-rooms",
+    title: "Bathrooms & changing rooms",
+    description:
+      "Clean restrooms and changing areas so you can arrive, train, and get on with your day comfortably.",
+  },
+  {
+    slug: "bodybuilding",
+    title: "Functional bodybuilding space",
+    description:
+      "Dedicated room for hypertrophy, accessory work, and strength building—beyond the main class floor.",
+  },
+  {
+    slug: "kids-teens",
+    title: "CrossFit Kids & teen classes",
+    description:
+      "Youth fitness in a coached, supportive environment. Ages and details confirmed when you enroll.",
+  },
+  {
+    slug: "coaching",
+    title: "Expert coaching",
+    description:
+      "Certified coaches who scale every workout, teach proper form, and know your name.",
+  },
+  {
+    slug: "equipment",
+    title: "Top-of-the-line equipment",
+    description:
+      "Barbells, racks, conditioning tools, and plenty of space to move safely and efficiently.",
+  },
+  {
+    slug: "assessment",
+    title: "Assessment-first onboarding",
+    description:
+      "Every athlete starts with a complimentary assessment so we never throw you into class cold.",
+  },
+] as const;
+
+export const youthHighlight = {
+  title: "CrossFit Kids & teen classes",
+  subtitle: "Youth fitness at Varno",
+  description:
+    "Our kids and teen program builds strength, coordination, and confidence in a fun, coached setting. Sessions focus on fundamental movement, teamwork, and healthy habits that last.",
+  bullets: [
+    "Coached environment with attention to form and safety",
+    "Scalable workouts for different ages and abilities",
+    "Supportive community that keeps young athletes engaged",
+  ],
+} as const;
+
 export const schedule = [
   {
     day: "Monday",
@@ -131,9 +203,9 @@ export const programs = [
   },
   {
     slug: "youth",
-    title: "Kids Class",
+    title: "Kids & Teen Classes",
     price: "$50/month",
-    summary: "Youth fitness in a supportive, coached environment.",
+    summary: "CrossFit-style youth fitness in a supportive, coached environment.",
     bullets: [
       `Held ${site.kids.schedule}.`,
       `Call ${site.kids.phoneDisplay} to learn more and enroll.`,
