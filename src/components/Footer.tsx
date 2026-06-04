@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SocialLinks } from "@/components/SocialLinks";
-import { site } from "@/content/site";
+import { serviceAreas, site } from "@/content/site";
 import { media } from "@/content/media";
 
 export function Footer() {
@@ -9,6 +9,25 @@ export function Footer() {
 
   return (
     <footer className="border-t border-white/10 bg-brand-surface">
+      <div className="border-b border-white/5 bg-brand-accent/10">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-8 sm:flex-row sm:px-6">
+          <div className="text-center sm:text-left">
+            <p className="font-display text-lg font-bold uppercase tracking-wide text-white">
+              Book your free assessment
+            </p>
+            <p className="mt-1 text-sm text-stone-400">
+              Complimentary fitness assessment — no obligation.
+            </p>
+          </div>
+          <Link
+            href="/contact"
+            className="shrink-0 rounded-md bg-brand-accent px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-accent/25 transition hover:bg-brand-accentHover"
+          >
+            Request free assessment
+          </Link>
+        </div>
+      </div>
+
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 lg:grid-cols-3">
         <div>
           <div className="flex items-center gap-3">
@@ -22,14 +41,28 @@ export function Footer() {
             <p className="font-display text-2xl text-white">{site.name}</p>
           </div>
           <p className="mt-2 max-w-sm text-sm text-stone-400">{site.tagline}</p>
+          <p className="mt-4 text-xs leading-relaxed text-stone-500">
+            Hybrid gym in Atlantic Highlands, NJ — serving{" "}
+            {serviceAreas.slice(0, 4).join(", ")}, and Monmouth County.
+          </p>
         </div>
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-stone-500">
-            Visit
+            Location &amp; contact
           </p>
           <address className="mt-3 not-italic text-sm text-stone-300">
             {fullAddress}
           </address>
+          <p className="mt-3 text-sm">
+            <a
+              className="text-brand-accentHover hover:underline"
+              href={site.google.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Get directions on Google Maps →
+            </a>
+          </p>
           <p className="mt-3 text-sm">
             <a className="text-brand-accentHover hover:underline" href={`tel:${site.phoneTel}`}>
               {site.phoneDisplay}
@@ -59,19 +92,13 @@ export function Footer() {
           <p className="mt-6 text-sm font-semibold uppercase tracking-wide text-stone-500">
             Follow us
           </p>
-          <div className="mt-3 flex items-center gap-4">
+          <div className="mt-3">
             <SocialLinks />
-            <Link
-              href="/contact"
-              className="text-sm font-medium text-stone-300 hover:text-white"
-            >
-              Contact form
-            </Link>
           </div>
         </div>
       </div>
       <div className="border-t border-white/5 py-6 text-center text-xs text-stone-500">
-        © {new Date().getFullYear()} {site.name}. All rights reserved.
+        © {new Date().getFullYear()} {site.name}. All rights reserved. · Atlantic Highlands, NJ
       </div>
     </footer>
   );

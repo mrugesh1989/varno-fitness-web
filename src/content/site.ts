@@ -4,11 +4,42 @@ const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://mrugesh1989.github.io/varno-fitness-web"
 ).replace(/\/$/, "");
 
+/** Local search terms — used in metadata and on-page copy (natural placement, not stuffing). */
+export const seoKeywords = [
+  "best gym in Atlantic Highlands",
+  "gym Atlantic Highlands NJ",
+  "fitness center Atlantic Highlands",
+  "personal training Atlantic Highlands",
+  "group fitness Atlantic Highlands",
+  "hybrid gym Atlantic Highlands NJ",
+  "CrossFit Atlantic Highlands",
+  "gym near Highlands NJ",
+  "gym Monmouth County NJ",
+  "gym near Sandy Hook",
+  "strength training Atlantic Highlands",
+  "HIIT classes Atlantic Highlands",
+  "free gym assessment Atlantic Highlands",
+  "Varno Fitness",
+] as const;
+
+export const serviceAreas = [
+  "Atlantic Highlands",
+  "Highlands",
+  "Middletown",
+  "Red Bank",
+  "Rumson",
+  "Fair Haven",
+  "Sea Bright",
+  "Monmouth County",
+] as const;
+
 export const site = {
   name: "Varno Fitness",
   tagline: "The place where we meet you where you are",
   description:
-    "Hybrid training in Atlantic Highlands: group classes, private coaching, and youth fitness with assessment-first coaching.",
+    "Varno Fitness is the best gym in Atlantic Highlands, NJ — hybrid group fitness, personal training, and youth classes with a free assessment. Serving Highlands, Middletown, and Monmouth County.",
+  seoDescription:
+    "Looking for the best gym in Atlantic Highlands or a fitness center near Highlands, NJ? Varno Fitness offers coached hybrid training, group HIIT & strength classes, private coaching, and CrossFit Kids — start with a free assessment.",
   url: SITE_URL,
   phoneDisplay: "(732) 977-2916",
   phoneTel: "+17329772916",

@@ -18,7 +18,7 @@ ${site.address.street}, ${site.address.city}, ${site.address.state} ${site.addre
 
 const NEXT_URL = `${site.url}/contact/?sent=1`;
 
-function SuccessBanner() {
+function SuccessBanner({ variant }: { variant: ContactFormProps["variant"] }) {
   const params = useSearchParams();
   if (params.get("sent") !== "1") return null;
   return (
@@ -26,18 +26,31 @@ function SuccessBanner() {
       role="status"
       className="mb-6 rounded-md border border-emerald-500/40 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300"
     >
-      Thanks — your message is on the way to the gym, and a confirmation has been
-      emailed to you. A coach will reply within one business day.
+      {variant === "assessment"
+        ? "Thanks — your free assessment request is on the way. Check your email for confirmation; a coach will follow up within one business day."
+        : "Thanks — your message is on the way to the gym, and a confirmation has been emailed to you. A coach will reply within one business day."}
     </div>
   );
 }
 
-function FormBody() {
+type ContactFormProps = {
+  variant?: "default" | "assessment";
+};
+
+function FormBody({ variant = "default" }: ContactFormProps) {
   const id = useId();
 
   return (
     <form action={endpoint} method="POST" className="space-y-5">
-      <input type="hidden" name="_subject" value={`Website inquiry from ${site.name} site`} />
+      <input
+        type="hidden"
+        name="_subject"
+        value={
+          variant === "assessment"
+            ? `Free assessment request — ${site.name}`
+            : `Website inquiry from ${site.name} site`
+        }
+      />
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="_autoresponse" value={AUTORESPONSE} />
       <input type="hidden" name="_next" value={NEXT_URL} />
@@ -100,15 +113,19 @@ function FormBody() {
           name="message"
           rows={5}
           className="mt-2 w-full rounded-md border border-white/10 bg-brand-dark px-4 py-3 text-stone-100 outline-none ring-brand-accent focus:ring-2"
-          placeholder="Tell us about your goals or ask a question."
+          placeholder={
+            variant === "assessment"
+              ? "Your goals, experience, and best time to reach you…"
+              : "Tell us about your goals or ask a question."
+          }
         />
       </div>
 
       <button
         type="submit"
-        className="w-full rounded-md bg-brand-accent py-3 text-sm font-semibold text-white transition hover:bg-brand-accentHover"
+        className="w-full rounded-md bg-brand-accent py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand-accent/25 transition hover:bg-brand-accentHover"
       >
-        Send message
+        {variant === "assessment" ? "Request my free assessment" : "Send message"}
       </button>
 
       <p className="text-xs text-stone-500">
@@ -120,13 +137,13 @@ function FormBody() {
   );
 }
 
-export function ContactForm() {
+export function ContactForm({ variant = "default" }: ContactFormProps) {
   return (
     <div>
       <Suspense fallback={null}>
-        <SuccessBanner />
+        <SuccessBanner variant={variant} />
       </Suspense>
-      <FormBody />
+      <FormBody variant={variant} />
     </div>
   );
 }

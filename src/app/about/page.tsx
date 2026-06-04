@@ -1,11 +1,12 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 import { media } from "@/content/media";
-import { site } from "@/content/site";
+import { seoKeywords, site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "About & location",
-  description: `About ${site.name} in Atlantic Highlands — mission, hours, and how to find us.`,
+  title: "About our Atlantic Highlands gym",
+  description: `About ${site.name} — hybrid gym in Atlantic Highlands, NJ serving Highlands & Monmouth County. Mission, hours, and location.`,
+  keywords: [...seoKeywords],
 };
 
 const mapQuery = encodeURIComponent(

@@ -7,11 +7,12 @@ import { GoogleReviewsSection } from "@/components/GoogleReviewsSection";
 import { HeroSlideshow } from "@/components/HeroSlideshow";
 import { SocialLinks } from "@/components/SocialLinks";
 import { programCardImage, media } from "@/content/media";
-import { programs, site } from "@/content/site";
+import { programs, seoKeywords, site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Atlantic Highlands hybrid gym",
-  description: site.description,
+  title: "Best gym in Atlantic Highlands NJ | Hybrid fitness & free assessment",
+  description: site.seoDescription,
+  keywords: [...seoKeywords],
 };
 
 export default function HomePage() {
@@ -162,40 +163,24 @@ export default function HomePage() {
       <GoogleReviewsSection />
 
       <section className="border-t border-white/10 bg-brand-surface/30 py-16 sm:py-20">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:grid-cols-2 sm:px-6">
-          <div>
-            <h2 className="font-display text-3xl font-bold uppercase tracking-wide text-white">
-              Visit us
-            </h2>
-            <p className="mt-4 text-stone-400">
-              {site.address.street}, {site.address.city}, {site.address.state}{" "}
-              {site.address.postalCode}
-            </p>
-            <p className="mt-2">
-              <a href={`tel:${site.phoneTel}`} className="font-medium text-brand-accentHover hover:underline">
-                {site.phoneDisplay}
-              </a>
-            </p>
-          </div>
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-stone-500">
-              Hours
-            </h3>
-            <ul className="mt-3 space-y-2 text-sm text-stone-300">
-              {site.hours.map((h) => (
-                <li key={h.days} className="flex justify-between gap-4 border-b border-white/5 py-2">
-                  <span>{h.days}</span>
-                  <span className="text-stone-400">{h.time}</span>
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/contact"
-              className="mt-6 inline-block rounded-md bg-brand-accent px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-accentHover"
-            >
-              Get directions &amp; contact
-            </Link>
-          </div>
+        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-accent">
+            Atlantic Highlands &amp; Monmouth County
+          </p>
+          <h2 className="mt-3 font-display text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl">
+            Ready to find your gym home?
+          </h2>
+          <p className="mt-4 text-lg text-stone-400">
+            Whether you searched for the <strong className="text-stone-200">best gym in Atlantic Highlands</strong>,
+            group fitness near Highlands, or personal training in Monmouth County — start with a
+            complimentary assessment. Hours, directions, and contact details are in the footer below.
+          </p>
+          <Link
+            href="/contact"
+            className="mt-8 inline-flex rounded-md bg-brand-accent px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-accent/25 transition hover:bg-brand-accentHover"
+          >
+            Book your free assessment
+          </Link>
         </div>
       </section>
     </>

@@ -1,4 +1,4 @@
-import { site, testimonials } from "@/content/site";
+import { serviceAreas, site, testimonials } from "@/content/site";
 
 /** LocalBusiness + Organization structured data for SEO. */
 export function SiteJsonLd() {
@@ -6,8 +6,26 @@ export function SiteJsonLd() {
     "@context": "https://schema.org",
     "@type": "ExerciseGym",
     name: site.name,
-    description: site.description,
+    description: site.seoDescription,
     url: site.url,
+    areaServed: serviceAreas.map((name) => ({
+      "@type": "City",
+      name,
+      containedInPlace: { "@type": "State", name: "New Jersey" },
+    })),
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 40.4079,
+      longitude: -74.0343,
+    },
+    priceRange: "$$",
+    knowsAbout: [
+      "Hybrid fitness training",
+      "Group fitness classes",
+      "Personal training",
+      "CrossFit Kids",
+      "Fitness assessment",
+    ],
     telephone: site.phoneTel,
     email: site.email,
     address: {

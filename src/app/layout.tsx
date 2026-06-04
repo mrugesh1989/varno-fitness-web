@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SiteJsonLd } from "@/components/SiteJsonLd";
 import { media } from "@/content/media";
-import { site } from "@/content/site";
+import { seoKeywords, site } from "@/content/site";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -26,22 +26,23 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | Atlantic Highlands hybrid gym`,
+    default: `${site.name} | Best gym in Atlantic Highlands, NJ`,
     template: `%s | ${site.name}`,
   },
-  description: site.description,
+  description: site.seoDescription,
+  keywords: [...seoKeywords],
   openGraph: {
     type: "website",
     locale: "en_US",
     url: site.url,
     siteName: site.name,
-    title: site.name,
-    description: site.description,
+    title: `${site.name} — Best gym in Atlantic Highlands, NJ`,
+    description: site.seoDescription,
   },
   twitter: {
     card: "summary_large_image",
     title: site.name,
-    description: site.description,
+    description: site.seoDescription,
   },
   alternates: {
     canonical: site.url,
