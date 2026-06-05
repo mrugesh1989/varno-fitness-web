@@ -32,10 +32,12 @@ jobs:
 
       - name: Build (Next.js static export)
         env:
-          # GitHub Pages project-page URL. When moving to the custom domain
-          # (varnofitness.com), clear both vars and restore public/CNAME.
-          NEXT_PUBLIC_BASE_PATH: /varno-fitness-web
-          NEXT_PUBLIC_SITE_URL: https://mrugesh1989.github.io/varno-fitness-web
+          # Custom apex domain (varnofitness.com). Assets serve from root, so
+          # NEXT_PUBLIC_BASE_PATH is empty. To revert to the github.io project
+          # URL, set BASE_PATH=/varno-fitness-web and SITE_URL to the github.io
+          # path, and remove public/CNAME.
+          NEXT_PUBLIC_BASE_PATH: ""
+          NEXT_PUBLIC_SITE_URL: https://varnofitness.com
         run: npm run build
 
       - name: Upload Pages artifact
