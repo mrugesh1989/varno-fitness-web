@@ -222,19 +222,54 @@ registered at GoDaddy the whole time — this only changes where it points.
 
 #### 1. DNS first (GoDaddy) — fastest way back online
 
-Sign in to GoDaddy → **varnofitness.com → DNS / Manage DNS**, then undo the
-cutover records:
+Sign in to GoDaddy → **varnofitness.com → DNS / Manage DNS**.
 
-- **Apex `A` records (`@`):** delete the three extra GitHub IPs and point the
-  remaining `@` `A` record back to the original GoDaddy value. If the old site was
-  GoDaddy **Websites + Marketing**, the simplest path is to **re-publish /
-  reconnect** that product — it restores its own `A` record automatically.
-- **`www`:** restore the original `www` record (the previous setup had
-  `www → varnofitness.com`), replacing the `www → mrugesh1989.github.io` CNAME.
-- **Leave `MX` / email `TXT` (SPF/DKIM) untouched** so email keeps working.
+**Original records (the pre-cutover state to restore to):**
 
-DNS revert takes another propagation cycle (~10–60 min). Once `@` no longer
-resolves to the `185.199.x.153` IPs, the public domain serves GoDaddy again.
+| Type  | Name            | Data                                      | TTL    |
+|-------|-----------------|-------------------------------------------|--------|
+| A     | `@`             | `WebsiteBuilder Site` (GoDaddy-managed)   | 1 Hour |
+| CNAME | `www`           | `varnofitness.com.`                       | 1 Hour |
+| CNAME | `pay`           | `paylinks.commerce.godaddy.com.`          | 1 Hour |
+| CNAME | `_domainconnect`| `_domainconnect.gd.domaincontrol.com.`    | 1 Hour |
+| NS    | `@`             | `ns09.domaincontrol.com.`                 | 1 Hour |
+| NS    | `@`             | `ns10.domaincontrol.com.`                 | 1 Hour |
+| SOA   | `@`             | `Primary nameserver: ns09.domaincontrol.com.` | 1 Hour |
+
+**Current records (added during cutover — these are what you undo):**
+
+| Type  | Name  | Data                  |
+|-------|-------|-----------------------|
+| A     | `@`   | `185.199.108.153`     |
+| A     | `@`   | `185.199.109.153`     |
+| A     | `@`   | `185.199.110.153`     |
+| A     | `@`   | `185.199.111.153`     |
+| CNAME | `www` | `mrugesh1989.github.io.` |
+
+**Exact steps to revert:**
+
+1. **Delete** three of the four `@` `A` records — `185.199.109.153`,
+   `185.199.110.153`, and `185.199.111.153` (leave one `@` `A` row to edit in the
+   next step).
+2. **Restore the apex `A` record to `WebsiteBuilder Site`.** This value is not
+   typed by hand — it is auto-managed by GoDaddy Websites + Marketing. Reconnect it:
+   - GoDaddy → **Websites + Marketing** (or **My Products → Website Builder**) →
+     open the `varnofitness.com` site → **Settings → Domain / Connect domain** →
+     reconnect `varnofitness.com` and **Publish**.
+   - Reconnecting/publishing rewrites the last `@` `A` record back to
+     `WebsiteBuilder Site` automatically. If a leftover `185.199.108.153` `A` row
+     remains, delete it after the WebsiteBuilder record appears.
+3. **Edit the `www` CNAME** from `mrugesh1989.github.io.` back to
+   **`varnofitness.com.`** (Type `CNAME`, Name `www`, Data `varnofitness.com.`,
+   TTL 1 Hour).
+4. **Leave these untouched** — they were never changed and must stay:
+   `CNAME pay`, `CNAME _domainconnect`, both `NS @` records, the `SOA` record, and
+   any `MX` / email `TXT` (SPF/DKIM) records so `varnofitness@gmail.com` keeps
+   working.
+
+End state = the "Original records" table above. DNS revert takes another
+propagation cycle (~10–60 min). Once `@` no longer resolves to the
+`185.199.x.153` IPs, the public domain serves the GoDaddy site again.
 
 #### 2. Release the domain from GitHub Pages
 
