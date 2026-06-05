@@ -12,15 +12,6 @@ export const metadata: Metadata = {
 export default function GalleryPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-      <div className="mb-6">
-        <Image
-          src={media.varnoMark}
-          alt=""
-          width={400}
-          height={130}
-          className="h-12 w-auto max-w-[240px] sm:h-14 sm:max-w-[280px]"
-        />
-      </div>
       <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-accent">
         Inside the gym
       </p>

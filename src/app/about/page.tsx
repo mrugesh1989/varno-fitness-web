@@ -1,6 +1,4 @@
-import Image from "next/image";
 import type { Metadata } from "next";
-import { media } from "@/content/media";
 import { seoKeywords, site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -16,16 +14,10 @@ const mapQuery = encodeURIComponent(
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-      <div className="mb-6">
-        <Image
-          src={media.varnoMark}
-          alt=""
-          width={400}
-          height={130}
-          className="h-12 w-auto max-w-[240px] sm:h-14 sm:max-w-[280px]"
-        />
-      </div>
-      <h1 className="font-display text-4xl font-bold uppercase tracking-wide text-white sm:text-5xl">
+      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-accent">
+        Atlantic Highlands, NJ
+      </p>
+      <h1 className="mt-2 font-display text-4xl font-bold uppercase tracking-wide text-white sm:text-5xl">
         About {site.name}
       </h1>
       <div className="mt-10 grid gap-12 lg:grid-cols-2 lg:items-start">

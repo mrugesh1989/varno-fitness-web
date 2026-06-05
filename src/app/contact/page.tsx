@@ -1,7 +1,5 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
-import { media } from "@/content/media";
 import { seoKeywords, site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -14,15 +12,6 @@ export default function ContactPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
       <div className="mb-10 text-center lg:text-left">
-        <div className="mb-6 flex justify-center lg:justify-start">
-          <Image
-            src={media.varnoMark}
-            alt=""
-            width={400}
-            height={130}
-            className="h-12 w-auto max-w-[240px] sm:h-14 sm:max-w-[280px]"
-          />
-        </div>
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-accent">
           Atlantic Highlands, NJ · Monmouth County
         </p>
