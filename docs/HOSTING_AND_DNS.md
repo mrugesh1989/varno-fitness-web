@@ -45,18 +45,21 @@ npx serve out -l 3001
 
 ---
 
-## Part B — Current deployment (GitHub Pages, project URL)
+## Part B — Current deployment (GitHub Pages, custom domain)
 
-The repo `mrugesh1989/varno-fitness-web` is already wired up:
+The repo `mrugesh1989/varno-fitness-web` is live on the apex domain:
 
-- **Public URL:** https://mrugesh1989.github.io/varno-fitness-web/
+- **Public URL:** https://varnofitness.com/ (`www` 301-redirects to the apex)
 - **Workflow:** `.github/workflows/deploy.yml` runs on every push to `main` and on manual dispatch.
-- **Pages source:** GitHub Actions.
+- **Pages source:** GitHub Actions; custom domain bound via `public/CNAME` + Pages `cname`.
 - **HTTPS:** enforced.
 - **Build-time env vars (set inside the workflow):**
-  - `NEXT_PUBLIC_BASE_PATH=/varno-fitness-web`
-  - `NEXT_PUBLIC_SITE_URL=https://mrugesh1989.github.io/varno-fitness-web`
+  - `NEXT_PUBLIC_BASE_PATH=""` (assets served from `/`)
+  - `NEXT_PUBLIC_SITE_URL=https://varnofitness.com`
 - **No form-related secrets.** Formsubmit is keyless; the recipient address lives in `src/components/ContactForm.tsx`.
+
+> The cutover steps that produced this state are in **Part C**. To go back to the
+> old GoDaddy site, see **Part C → Rolling back**.
 
 To redeploy after a change:
 
@@ -76,54 +79,203 @@ git push
 
 ---
 
-## Part C — Moving to `varnofitness.com` later
+## Part C — Moving to `varnofitness.com`
 
-When you are ready to point the custom domain at the site (no rebuild needed unless the URL changes):
+This swaps the live domain from the old GoDaddy-built site to this GitHub Pages
+site. There are two halves: **C1 — repo changes** (in this codebase / GitHub) and
+**C2 — DNS changes** (in the GoDaddy dashboard). Both are required.
 
-### 1. Edit the workflow build-time vars
+### What breaks, what doesn't (read first)
 
-In `.github/workflows/deploy.yml`, either delete both env vars or set them to the custom domain:
+- The public site at **`varnofitness.com` is controlled by GoDaddy DNS**, not by
+  the repo. Repo changes (C1) alone are invisible to the public; the old site
+  keeps serving until you change DNS (C2).
+- Doing C1 **breaks the project preview URL** `https://mrugesh1989.github.io/varno-fitness-web/`
+  (assets move to the root and Pages redirects to the apex domain). That is
+  expected — the apex domain becomes the only working URL.
+
+### Recommended order (minimal downtime)
+
+1. Do **C2** (GoDaddy DNS) first so propagation can start.
+2. Then do **C1** (repo) and push.
+3. Within ~10–60 min the apex domain serves the new site over HTTPS. The preview
+   URL only stops working right as the real domain takes over.
+
+---
+
+### C1 — Repo / GitHub side
+
+#### 1. Flip the workflow build-time vars
+
+In `.github/workflows/deploy.yml`, set both env vars for an apex/root deployment:
 
 ```yaml
 env:
-  # Both vars empty = build for an apex/root deployment.
   NEXT_PUBLIC_BASE_PATH: ""
   NEXT_PUBLIC_SITE_URL: https://varnofitness.com
 ```
 
-### 2. Restore the `CNAME`
+(Empty `NEXT_PUBLIC_BASE_PATH` = assets load from `/` instead of `/varno-fitness-web`.)
+
+#### 2. Add the `CNAME` file
+
+The static export must include a `CNAME` file so Pages keeps the custom domain
+bound on every deploy. Putting it in `public/` copies it into `out/` at build.
 
 ```bash
 echo "varnofitness.com" > public/CNAME
-git add public/CNAME
+git add public/CNAME .github/workflows/deploy.yml
 git commit -m "Bind GitHub Pages to varnofitness.com"
 git push
 ```
 
-### 3. Set the custom domain on Pages
+#### 3. Tell GitHub Pages about the domain
 
 ```bash
-./.gh-bin/gh api -X PUT repos/mrugesh1989/varno-fitness-web/pages -f cname=varnofitness.com
+gh api -X PUT repos/mrugesh1989/varno-fitness-web/pages -f cname=varnofitness.com
 ```
 
-### 4. Update DNS at GoDaddy
+#### 4. (Recommended) Verify domain ownership
 
-- Remove old Website Builder / parking records.
-- Apex `A` records (host: `@`, TTL: 600 s):
+In GitHub: **Settings → Pages → Add a domain / Verify** (or
+**Settings → Pages → custom domain**). Verifying prevents domain takeover. For an
+apex domain GitHub may ask you to add a `TXT` record at GoDaddy — follow the
+on-screen value.
+
+---
+
+### C2 — GoDaddy DNS side
+
+Sign in to GoDaddy → **Domain Portfolio** → **varnofitness.com** → **DNS / Manage DNS**.
+
+#### 1. Apex `A` records (host `@`)
+
+GoDaddy usually has one `@` `A` record pointing at a parking/forwarding IP.
+
+- **Edit** the existing `@` `A` record → value `185.199.108.153` → Save.
+- **Add** three more `A` records, all host `@`:
   ```text
-  185.199.108.153
   185.199.109.153
   185.199.110.153
   185.199.111.153
   ```
-- `CNAME` on `www` → `mrugesh1989.github.io.` (trailing dot).
-- Leave **MX** records alone so Gmail keeps working.
+- TTL: `600` seconds (or 1 hour).
 
-Propagation typically takes 10–60 minutes. GitHub auto-issues a Let's Encrypt cert once DNS resolves.
+End state: four `A` records at `@`, one per GitHub Pages IP.
 
-### 5. Confirm HTTPS
+#### 2. `www` subdomain
 
-In the repo: **Settings → Pages → Enforce HTTPS** (tick once available).
+- Edit (or add) the `www` record:
+  - **Type:** `CNAME`
+  - **Name/Host:** `www`
+  - **Value/Points to:** `mrugesh1989.github.io` (GoDaddy appends the trailing dot)
+- Save.
+
+#### 3. Remove conflicting records
+
+- **Domain → Forwarding:** delete any domain forwarding — GoDaddy forwarding
+  silently injects its own `A`/CNAME records that will fight these changes.
+- If the current site uses **GoDaddy Websites + Marketing**, open that product and
+  **unpublish / disconnect the domain** so it stops re-pointing DNS.
+
+#### 4. Leave email records alone
+
+Do **not** touch `MX` records or email `TXT` (SPF/DKIM). This keeps
+`varnofitness@gmail.com` and the contact form working.
+
+---
+
+### C3 — Verify the cutover
+
+```bash
+# Should return the four 185.199.x.153 addresses:
+dig varnofitness.com +short
+# www should resolve via the github.io CNAME:
+dig www.varnofitness.com +short
+```
+
+- In the repo: **Settings → Pages** shows the domain verified and auto-issues a
+  Let's Encrypt cert. Once available, tick **Enforce HTTPS**.
+- Load `https://varnofitness.com` and `https://www.varnofitness.com` — both should
+  serve the new site.
+
+### Future edits after cutover
+
+There is only one environment (production): every push to `main` deploys straight
+to `varnofitness.com` (~1 min). Preview changes locally before pushing:
+
+```bash
+npm run dev          # private preview at http://localhost:3000
+# or production-accurate:
+npm run build && npx serve out
+```
+
+### Rolling back — revert to the GoDaddy website
+
+Use this to move the live site back from GitHub Pages to GoDaddy. As with the
+cutover there are two halves: **repo/Pages** and **GoDaddy DNS**. The domain stays
+registered at GoDaddy the whole time — this only changes where it points.
+
+> Restore point: the tag `pre-custom-domain-projecturl` marks the last
+> project-URL state of the repo. Inspect it with
+> `git show pre-custom-domain-projecturl:.github/workflows/deploy.yml`.
+
+#### 1. DNS first (GoDaddy) — fastest way back online
+
+Sign in to GoDaddy → **varnofitness.com → DNS / Manage DNS**, then undo the
+cutover records:
+
+- **Apex `A` records (`@`):** delete the three extra GitHub IPs and point the
+  remaining `@` `A` record back to the original GoDaddy value. If the old site was
+  GoDaddy **Websites + Marketing**, the simplest path is to **re-publish /
+  reconnect** that product — it restores its own `A` record automatically.
+- **`www`:** restore the original `www` record (the previous setup had
+  `www → varnofitness.com`), replacing the `www → mrugesh1989.github.io` CNAME.
+- **Leave `MX` / email `TXT` (SPF/DKIM) untouched** so email keeps working.
+
+DNS revert takes another propagation cycle (~10–60 min). Once `@` no longer
+resolves to the `185.199.x.153` IPs, the public domain serves GoDaddy again.
+
+#### 2. Release the domain from GitHub Pages
+
+```bash
+# Clear the custom domain binding (turns off HTTPS enforcement too):
+gh api -X PUT repos/mrugesh1989/varno-fitness-web/pages -f cname=""
+```
+
+In the UI this is **Settings → Pages → Custom domain → Remove**.
+
+#### 3. Restore the repo to the project URL (optional but recommended)
+
+Only needed if you want the github.io preview URL working again. In
+`.github/workflows/deploy.yml` set the vars back:
+
+```yaml
+env:
+  NEXT_PUBLIC_BASE_PATH: /varno-fitness-web
+  NEXT_PUBLIC_SITE_URL: https://mrugesh1989.github.io/varno-fitness-web
+```
+
+Then remove the `CNAME` file and redeploy:
+
+```bash
+git rm public/CNAME
+git add .github/workflows/deploy.yml
+git commit -m "Revert GitHub Pages to project URL"
+git push
+```
+
+After the workflow runs, the preview URL
+`https://mrugesh1989.github.io/varno-fitness-web/` works again.
+
+#### 4. Verify the revert
+
+```bash
+dig varnofitness.com +short      # should NOT be the 185.199.x.153 IPs anymore
+curl -sS -o /dev/null -w "%{http_code}\n" https://varnofitness.com/
+```
+
+Load `https://varnofitness.com` — it should serve the GoDaddy site again.
 
 ---
 
