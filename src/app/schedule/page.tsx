@@ -1,11 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { schedule, site } from "@/content/site";
+import { schedule, seoKeywords, site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Class schedule",
+  title: "Class Schedule — Gym in Atlantic Highlands, NJ",
   description:
-    "Weekly class schedule for Varno Fitness in Atlantic Highlands, NJ. VF60 group fitness classes Monday through Saturday.",
+    "Weekly VF60 group fitness and HIIT class schedule at Varno Fitness in Atlantic Highlands, NJ — classes Monday through Saturday, plus kids classes. New members start with a free assessment.",
+  keywords: [...seoKeywords],
 };
 
 export default function SchedulePage() {

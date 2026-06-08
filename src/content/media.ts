@@ -21,18 +21,18 @@ export const media = {
 } as const;
 
 export const gallery = [
-  { src: asset("/gallery/IMG_6722.JPG"), alt: "Varno Fitness training floor" },
-  { src: asset("/gallery/IMG_6834.JPG"), alt: "Members training at Varno Fitness" },
-  { src: asset("/gallery/IMG_6853.JPG"), alt: "Group class in session" },
-  { src: asset("/gallery/IMG_9078.JPG"), alt: "Coached strength training" },
-  { src: asset("/gallery/IMG_2083.jpeg"), alt: "Functional fitness equipment" },
-  { src: asset("/gallery/IMG_3604.JPG"), alt: "Varno Fitness gym interior" },
-  { src: asset("/gallery/IMG_5411.jpeg"), alt: "Athletes working out together" },
-  { src: asset("/gallery/IMG_2415.JPG"), alt: "Community at Varno Fitness" },
-  { src: asset("/gallery/IMG_4934.jpeg"), alt: "Weightlifting area" },
-  { src: asset("/gallery/IMG_9551.jpeg"), alt: "Training space at Varno Fitness" },
-  { src: asset("/gallery/IMG_0148.jpeg"), alt: "Members during a workout" },
-  { src: asset("/gallery/IMG_9038.JPG"), alt: "Varno Fitness facility" },
+  { src: asset("/gallery/IMG_6722.JPG"), alt: "Training floor at Varno Fitness gym in Atlantic Highlands, NJ" },
+  { src: asset("/gallery/IMG_6834.JPG"), alt: "Members strength training at Varno Fitness in Atlantic Highlands" },
+  { src: asset("/gallery/IMG_6853.JPG"), alt: "VF60 group fitness class in session at Varno Fitness" },
+  { src: asset("/gallery/IMG_9078.JPG"), alt: "Coach leading strength training at Varno Fitness, Monmouth County" },
+  { src: asset("/gallery/IMG_2083.jpeg"), alt: "Functional fitness equipment at Varno Fitness gym in Atlantic Highlands" },
+  { src: asset("/gallery/IMG_3604.JPG"), alt: "Interior of Varno Fitness hybrid gym in Atlantic Highlands, NJ" },
+  { src: asset("/gallery/IMG_5411.jpeg"), alt: "Athletes training together in a group class at Varno Fitness" },
+  { src: asset("/gallery/IMG_2415.JPG"), alt: "Fitness community at Varno Fitness near Highlands, NJ" },
+  { src: asset("/gallery/IMG_4934.jpeg"), alt: "Weightlifting and strength area at Varno Fitness, Atlantic Highlands" },
+  { src: asset("/gallery/IMG_9551.jpeg"), alt: "Open training space at Varno Fitness gym in Atlantic Highlands" },
+  { src: asset("/gallery/IMG_0148.jpeg"), alt: "Members during a HIIT workout at Varno Fitness, Monmouth County" },
+  { src: asset("/gallery/IMG_9038.JPG"), alt: "Varno Fitness gym facility in Atlantic Highlands, New Jersey" },
 ] as const;
 
 export function programCardImage(slug: string): string {

@@ -2,12 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { AmenitiesSection } from "@/components/AmenitiesSection";
+import { FaqJsonLd } from "@/components/FaqJsonLd";
+import { FaqSection } from "@/components/FaqSection";
 import { GettingStartedSection } from "@/components/GettingStartedSection";
 import { GoogleReviewsSection } from "@/components/GoogleReviewsSection";
 import { HeroSlideshow } from "@/components/HeroSlideshow";
 import { SocialLinks } from "@/components/SocialLinks";
 import { programCardImage, media } from "@/content/media";
-import { programs, seoKeywords, site } from "@/content/site";
+import { programs, seoKeywords, serviceAreas, site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Best gym in Atlantic Highlands NJ | Hybrid fitness & free assessment",
@@ -109,6 +111,11 @@ export default function HomePage() {
             generic templates. Whether you are new, returning from time off, or leveling up, we meet
             you where you are and build a plan that fits your life.
           </p>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-stone-400">
+            Conveniently located in Atlantic Highlands with free parking, we coach members from{" "}
+            {serviceAreas.slice(1, 6).join(", ")}, and across Monmouth County—offering group
+            fitness, personal training, strength, and HIIT classes for every level.
+          </p>
         </div>
       </section>
 
@@ -161,6 +168,9 @@ export default function HomePage() {
       <AmenitiesSection />
 
       <GoogleReviewsSection />
+
+      <FaqSection />
+      <FaqJsonLd />
 
       <section className="border-t border-white/10 bg-brand-surface/30 py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">

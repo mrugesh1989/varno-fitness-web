@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { seoKeywords, site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "About our Atlantic Highlands gym",
-  description: `About ${site.name} — hybrid gym in Atlantic Highlands, NJ serving Highlands & Monmouth County. Mission, hours, and location.`,
+  title: "About — Best Gym in Atlantic Highlands, NJ",
+  description: `About ${site.name} — the hybrid gym in Atlantic Highlands, NJ serving Highlands, Middletown & Monmouth County. Our mission, hours, location, and free parking.`,
   keywords: [...seoKeywords],
 };
 

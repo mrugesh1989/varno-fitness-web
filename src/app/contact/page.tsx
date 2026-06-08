@@ -3,7 +3,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { seoKeywords, site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Free fitness assessment | Contact",
+  title: "Contact & Free Fitness Assessment — Atlantic Highlands",
   description: `Book a free gym assessment at ${site.name} in Atlantic Highlands, NJ — best hybrid gym for group fitness, personal training & CrossFit Kids near Highlands & Monmouth County.`,
   keywords: [...seoKeywords],
 };

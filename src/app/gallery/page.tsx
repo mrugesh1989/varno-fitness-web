@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { gallery, media } from "@/content/media";
-import { site } from "@/content/site";
+import { gallery } from "@/content/media";
+import { seoKeywords, site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Gallery",
-  description: `Inside ${site.name} in Atlantic Highlands, NJ — our training floor, equipment, and community.`,
+  title: "Gym Photos — Inside Our Atlantic Highlands Facility",
+  description: `See inside ${site.name} in Atlantic Highlands, NJ — our training floor, equipment, group classes, and community. The best gym near Highlands & Monmouth County.`,
+  keywords: [...seoKeywords],
 };
 
 export default function GalleryPage() {

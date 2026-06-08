@@ -234,6 +234,50 @@ export const programs = [
   },
 ] as const;
 
+/**
+ * Common questions for the FAQ section. Answers are kept factual and concise so
+ * the visible copy matches the FAQPage structured data (Google requirement).
+ */
+export const faqs = [
+  {
+    question: "Where is Varno Fitness located?",
+    answer: `Varno Fitness is at ${site.address.street}, ${site.address.city}, ${site.address.state} ${site.address.postalCode}, with free on-site parking. We serve Atlantic Highlands, Highlands, Middletown, Red Bank, Rumson, and the wider Monmouth County area.`,
+  },
+  {
+    question: "What are your hours?",
+    answer: site.hours.map((h) => `${h.days}: ${h.time}`).join("; ") + ".",
+  },
+  {
+    question: "Do you offer a free trial or assessment?",
+    answer:
+      "Yes. Every new member starts with a complimentary fitness assessment. We review your goals, experience, and movement, then build a plan and scale your first workouts so you never train cold.",
+  },
+  {
+    question: "I'm a beginner — is Varno Fitness right for me?",
+    answer:
+      "Absolutely. Our assessment-first onboarding means every workout is scaled to your level. Coaches adjust loads and movements so beginners and returning athletes train safely alongside experienced members.",
+  },
+  {
+    question: "What types of training do you offer?",
+    answer:
+      "We specialize in hybrid training: VF60 group fitness (strength, HIIT, and conditioning), private 1-on-1 coaching, and CrossFit Kids classes for youth.",
+  },
+  {
+    question: "Do you have classes for kids?",
+    answer: `Yes. Our kids class runs ${site.kids.schedule} for ${site.kids.price}. Call ${site.kids.phoneDisplay} to learn more and enroll.`,
+  },
+  {
+    question: "How much does membership cost?",
+    answer:
+      "Group classes range from $145–$189, private coaching from $50–$80 per session, and kids classes are $50/month. Start with a free assessment and we'll recommend the right fit.",
+  },
+  {
+    question: "Is there parking at the gym?",
+    answer:
+      "Yes — free parking is available on site in Atlantic Highlands, so you can arrive, train, and get on with your day.",
+  },
+] as const;
+
 export const testimonials = [
   {
     quote:

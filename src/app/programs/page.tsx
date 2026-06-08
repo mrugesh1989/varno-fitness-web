@@ -2,12 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { programCardImage } from "@/content/media";
-import { programs, site } from "@/content/site";
+import { programs, seoKeywords, site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Programs & pricing",
+  title: "Programs, Classes & Pricing — Atlantic Highlands Gym",
   description:
-    "VF group classes, private coaching, and youth fitness at Varno Fitness in Atlantic Highlands.",
+    "Explore Varno Fitness programs in Atlantic Highlands, NJ: VF60 group fitness, private personal training, and CrossFit Kids. See pricing and start with a free assessment.",
+  keywords: [...seoKeywords],
 };
 
 export default function ProgramsPage() {
