@@ -34,39 +34,48 @@ export default function HomePage() {
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-accent">
               Atlantic Highlands, NJ
             </p>
-            <h1 className="mt-4 max-w-4xl font-display text-4xl font-bold uppercase leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="mt-3 max-w-4xl font-display text-[2.6rem] font-bold uppercase leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
               {site.tagline}
             </h1>
-            <p className="mt-6 max-w-2xl text-lg text-stone-300">
-              Achieve your goals with coached hybrid training—strength, HIIT, and conditioning
-              scaled to you. Start with a complimentary assessment so we can build the right plan.
+            <div className="mt-4 flex items-center gap-2 text-sm text-stone-300">
+              <span className="text-amber-400" aria-hidden>
+                ★★★★★
+              </span>
+              <span>
+                <strong className="text-white">{site.google.rating.toFixed(1)}</strong> on Google ·{" "}
+                {site.google.reviewCountDisplay} member reviews
+              </span>
+            </div>
+            <p className="mt-5 max-w-2xl text-lg text-stone-300">
+              Coached hybrid training—strength, HIIT, and conditioning scaled to you. Your first
+              step is a free 1-on-1 assessment, not a crowded class.
             </p>
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <Link
                 href="/contact"
-                className="rounded-md bg-brand-accent px-6 py-3 text-center text-sm font-semibold text-white shadow-lg shadow-brand-accent/25 transition hover:bg-brand-accentHover"
+                className="rounded-lg bg-brand-accent px-8 py-4 text-center text-base font-bold uppercase tracking-wide text-white shadow-lg shadow-brand-accent/30 transition hover:bg-brand-accentHover active:scale-[0.98] sm:py-3.5 sm:text-sm"
               >
                 Book your free assessment
               </Link>
               <Link
                 href="/programs"
-                className="rounded-md border border-white/20 px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-white/5"
+                className="rounded-lg border border-white/20 px-8 py-4 text-center text-base font-semibold text-white transition hover:bg-white/5 sm:py-3.5 sm:text-sm"
               >
                 View programs
               </Link>
             </div>
-            <div className="mt-12 grid gap-4 sm:grid-cols-2">
+            <p className="mt-3 text-xs text-stone-500">
+              Free · No commitment · Every level welcome
+            </p>
+            <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4">
               {[
                 { label: "Assessment-first", value: "Personal roadmap before class" },
                 { label: "Hybrid training", value: "Strength · HIIT · conditioning" },
-                {
-                  label: `${site.google.rating.toFixed(1)} ★ on Google`,
-                  value: `${site.google.reviewCountDisplay} member reviews`,
-                },
+                { label: "Community-driven", value: "Coaches who know your name" },
               ].map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-lg border border-white/10 bg-white/[0.03] p-5"
+                  className="rounded-lg border border-white/10 bg-white/[0.03] p-4 sm:p-5"
                 >
                   <p className="text-xs font-semibold uppercase tracking-wide text-brand-accent">
                     {item.label}
@@ -74,7 +83,7 @@ export default function HomePage() {
                   <p className="mt-2 text-sm text-stone-300">{item.value}</p>
                 </div>
               ))}
-              <div className="rounded-lg border border-white/10 bg-white/[0.03] p-5">
+              <div className="rounded-lg border border-white/10 bg-white/[0.03] p-4 sm:p-5">
                 <p className="text-xs font-semibold uppercase tracking-wide text-brand-accent">
                   Follow us
                 </p>
@@ -172,25 +181,44 @@ export default function HomePage() {
       <FaqSection />
       <FaqJsonLd />
 
-      <section className="border-t border-white/10 bg-brand-surface/30 py-16 sm:py-20">
-        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
+      <section className="relative overflow-hidden border-t border-white/10 py-16 sm:py-24">
+        <div
+          className="pointer-events-none absolute inset-0"
+          aria-hidden
+          style={{
+            background:
+              "radial-gradient(ellipse 90% 70% at 50% 110%, rgba(234,88,12,0.35), transparent), radial-gradient(ellipse 50% 40% at 10% 0%, rgba(217,119,6,0.12), transparent)",
+          }}
+        />
+        <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-accent">
             Atlantic Highlands &amp; Monmouth County
           </p>
-          <h2 className="mt-3 font-display text-3xl font-bold uppercase tracking-wide text-white sm:text-4xl">
-            Ready to find your gym home?
+          <h2 className="mt-3 font-display text-4xl font-bold uppercase tracking-wide text-white sm:text-5xl">
+            Your first workout starts with a conversation
           </h2>
-          <p className="mt-4 text-lg text-stone-400">
-            Whether you searched for the <strong className="text-stone-200">best gym in Atlantic Highlands</strong>,
+          <p className="mt-4 text-lg text-stone-300">
+            Whether you searched for the <strong className="text-white">best gym in Atlantic Highlands</strong>,
             group fitness near Highlands, or personal training in Monmouth County — start with a
-            complimentary assessment. Hours, directions, and contact details are in the footer below.
+            free 1-on-1 assessment and leave with a plan.
           </p>
-          <Link
-            href="/contact"
-            className="mt-8 inline-flex rounded-md bg-brand-accent px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-accent/25 transition hover:bg-brand-accentHover"
-          >
-            Book your free assessment
-          </Link>
+          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+            <Link
+              href="/contact"
+              className="w-full rounded-lg bg-brand-accent px-8 py-4 text-base font-bold uppercase tracking-wide text-white shadow-lg shadow-brand-accent/30 transition hover:bg-brand-accentHover active:scale-[0.98] sm:w-auto sm:py-3.5 sm:text-sm"
+            >
+              Book your free assessment
+            </Link>
+            <a
+              href={`tel:${site.phoneTel}`}
+              className="w-full rounded-lg border border-white/20 px-8 py-4 text-base font-semibold text-white transition hover:bg-white/5 sm:w-auto sm:py-3.5 sm:text-sm"
+            >
+              Or call {site.phoneDisplay}
+            </a>
+          </div>
+          <p className="mt-4 text-xs text-stone-500">
+            Free · No commitment · We reply within one business day
+          </p>
         </div>
       </section>
     </>

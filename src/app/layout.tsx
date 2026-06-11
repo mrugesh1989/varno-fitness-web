@@ -3,6 +3,7 @@ import { DM_Sans, Oswald } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SiteJsonLd } from "@/components/SiteJsonLd";
+import { StickyMobileCta } from "@/components/StickyMobileCta";
 import { media } from "@/content/media";
 import { seoKeywords, site } from "@/content/site";
 import "./globals.css";
@@ -21,6 +22,7 @@ const oswald = Oswald({
 
 export const viewport: Viewport = {
   themeColor: "#0c0a09",
+  viewportFit: "cover",
 };
 
 export const metadata: Metadata = {
@@ -60,11 +62,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${dmSans.variable} ${oswald.variable}`}>
-      <body className="min-h-screen font-sans">
+      <body className="min-h-screen pb-[4.75rem] font-sans md:pb-0">
         <SiteJsonLd />
         <Header />
         <main>{children}</main>
         <Footer />
+        <StickyMobileCta />
       </body>
     </html>
   );

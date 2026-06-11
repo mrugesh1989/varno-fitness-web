@@ -35,7 +35,7 @@ export function HeroSlideshow() {
             priority={i === 0}
             sizes="(max-width: 1024px) 100vw, 50vw"
             className={`object-cover object-center transition-opacity duration-1000 ${
-              i === active ? "opacity-100" : "opacity-0"
+              i === active ? "animate-kenburns opacity-100" : "opacity-0"
             }`}
           />
         ))}

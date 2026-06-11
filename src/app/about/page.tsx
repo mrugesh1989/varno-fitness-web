@@ -54,7 +54,7 @@ export default function AboutPage() {
           <div className="mt-6 overflow-hidden rounded-xl border border-white/10">
             <iframe
               title="Map — Varno Fitness"
-              className="aspect-video w-full grayscale contrast-125"
+              className="aspect-video w-full"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
