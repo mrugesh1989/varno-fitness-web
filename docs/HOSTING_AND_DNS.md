@@ -30,17 +30,18 @@
 | Command | When to use |
 |---------|-------------|
 | `npm run dev` | Development server (no basePath, serves from `/`). |
-| `npm run build` | Build the static export. With env vars (below) it produces files sized for the GitHub Pages project URL. |
+| `npm run build` | Build the static export into `out/`. The production build (workflow) uses the env vars shown below. |
 | `npm run lint` | Check code style / common issues. |
 
-To preview a production build locally that matches what GitHub Pages serves:
+To preview a production build locally that matches what GitHub Pages serves
+(the live site at varnofitness.com is built from the root, no base path):
 
 ```bash
-NEXT_PUBLIC_BASE_PATH=/varno-fitness-web \
-  NEXT_PUBLIC_SITE_URL=https://mrugesh1989.github.io/varno-fitness-web \
+NEXT_PUBLIC_BASE_PATH="" \
+  NEXT_PUBLIC_SITE_URL=https://varnofitness.com \
   npm run build
 npx serve out -l 3001
-# visit http://localhost:3001/varno-fitness-web/
+# visit http://localhost:3001/
 ```
 
 ---

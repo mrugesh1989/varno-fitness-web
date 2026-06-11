@@ -2,7 +2,7 @@
 
 Modern marketing site for **Varno Fitness** (Atlantic Highlands, NJ), aligned with partner brand [Isabella Fitness](https://isabellafitness.com/). Built with **Next.js 15** (App Router), **TypeScript**, **Tailwind CSS**, exported as a fully static site, and hosted on **GitHub Pages**. Contact-form submissions are delivered to `varnofitness@gmail.com` via [Formsubmit.co](https://formsubmit.co), which also auto-emails the customer a confirmation.
 
-**Live URL:** https://mrugesh1989.github.io/varno-fitness-web/
+**Live URL:** https://varnofitness.com (`www` redirects to it; HTTPS enforced)
 **Repository:** https://github.com/mrugesh1989/varno-fitness-web
 
 ## Documentation (start here if you are new to this stack)
@@ -19,10 +19,10 @@ Modern marketing site for **Varno Fitness** (Atlantic Highlands, NJ), aligned wi
 ```bash
 cd varno-fitness-web
 npm install
-cp .env.example .env.local
-# Edit .env.local: set NEXT_PUBLIC_WEB3FORMS_KEY so the form can deliver.
 npm run dev
 ```
+
+No env vars or secrets needed for local development.
 
 Open **http://localhost:3000** in your browser. For more detail and troubleshooting, see [docs/HOSTING_AND_DNS.md](docs/HOSTING_AND_DNS.md) (Part A).
 
@@ -39,11 +39,12 @@ Open **http://localhost:3000** in your browser. For more detail and troubleshoot
 
 See [`.env.example`](.env.example).
 
-- **No secret env vars are required.** The contact form posts directly to `https://formsubmit.co/ajax/varnofitness@gmail.com` and the gym inbox must be **confirmed once** by clicking the link Formsubmit emails on the first submission. To hide the gym email from the public bundle later, swap the URL in `src/components/ContactForm.tsx` for the random hash Formsubmit issues after verification (e.g. `https://formsubmit.co/ajax/abc123…`).
+- **No secret env vars are required.** The contact form posts directly to `https://formsubmit.co/varnofitness@gmail.com` (already activated for the live domain). To hide the gym email from the public bundle later, swap the URL in `src/components/ContactForm.tsx` for the random hash Formsubmit issues after verification.
+- The deploy workflow sets two build-time vars: `NEXT_PUBLIC_BASE_PATH=""` and `NEXT_PUBLIC_SITE_URL=https://varnofitness.com`.
 
 ## Deploy
 
-Every push to `main` builds the static export and publishes it via the workflow at `.github/workflows/deploy.yml`. The site currently serves from the GitHub project-page URL (`https://mrugesh1989.github.io/varno-fitness-web/`). To switch to the custom domain `varnofitness.com` later, follow [docs/HOSTING_AND_DNS.md](docs/HOSTING_AND_DNS.md).
+Every push to `main` builds the static export and publishes it to **https://varnofitness.com** via the workflow at `.github/workflows/deploy.yml` (~1–2 min). There is a single production environment — preview locally before pushing. Domain binding, DNS details, and the full revert-to-GoDaddy runbook are in [docs/HOSTING_AND_DNS.md](docs/HOSTING_AND_DNS.md).
 
 ### Email note
 
