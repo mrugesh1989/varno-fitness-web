@@ -120,7 +120,7 @@ function FormBody({ variant = "default" }: ContactFormProps) {
           required
           inputMode="tel"
           autoComplete="tel"
-          placeholder="(732) 555-0123"
+          placeholder="(XXX) XXX-XXXX"
           aria-describedby={`${id}-phone-hint`}
           onInput={(e) => validatePhone(e.currentTarget)}
           onInvalid={(e) => validatePhone(e.currentTarget)}
