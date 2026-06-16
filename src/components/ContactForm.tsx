@@ -37,6 +37,24 @@ type ContactFormProps = {
   variant?: "default" | "assessment";
 };
 
+/**
+ * Enforce a US 10-digit phone number while tolerating common formatting
+ * (spaces, dashes, parentheses, a leading +1). Uses the Constraint Validation
+ * API so the native form still blocks submission with a helpful message.
+ */
+function validatePhone(input: HTMLInputElement) {
+  const digits = input.value.replace(/\D/g, "");
+  const normalized = digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits;
+
+  if (input.value.trim() === "") {
+    input.setCustomValidity("Please enter your phone number.");
+  } else if (normalized.length !== 10) {
+    input.setCustomValidity("Please enter a valid 10-digit phone number.");
+  } else {
+    input.setCustomValidity("");
+  }
+}
+
 function FormBody({ variant = "default" }: ContactFormProps) {
   const id = useId();
 
@@ -93,15 +111,24 @@ function FormBody({ variant = "default" }: ContactFormProps) {
 
       <div>
         <label htmlFor={`${id}-phone`} className="block text-sm font-medium text-stone-300">
-          Phone <span className="text-stone-500">(optional)</span>
+          Phone
         </label>
         <input
           id={`${id}-phone`}
           name="phone"
           type="tel"
+          required
+          inputMode="tel"
           autoComplete="tel"
+          placeholder="(732) 555-0123"
+          aria-describedby={`${id}-phone-hint`}
+          onInput={(e) => validatePhone(e.currentTarget)}
+          onInvalid={(e) => validatePhone(e.currentTarget)}
           className="mt-2 w-full rounded-md border border-white/10 bg-brand-dark px-4 py-3 text-stone-100 outline-none ring-brand-accent focus:ring-2"
         />
+        <p id={`${id}-phone-hint`} className="mt-1.5 text-xs text-stone-500">
+          10-digit US number so a coach can reach you.
+        </p>
       </div>
 
       <div>
