@@ -69,16 +69,24 @@ export default function SchedulePage() {
           <p className="text-sm text-stone-400">
             <span className="font-semibold text-stone-200">Price:</span> {site.kids.price}
           </p>
-          <p className="mt-3 text-sm text-stone-400">
-            Call {site.kids.contactName} at{" "}
+          <div className="mt-4 rounded-lg border border-brand-gold/40 bg-brand-gold/10 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-gold">
+              Kids enrollment — dedicated line
+            </p>
             <a
               href={`tel:${site.kids.phoneTel}`}
-              className="font-semibold text-brand-accentHover hover:underline"
+              className="mt-3 inline-flex items-center gap-2 rounded-md bg-brand-gold px-4 py-2.5 text-sm font-bold text-brand-dark transition hover:bg-brand-accentHover"
             >
-              {site.kids.phoneDisplay}
-            </a>{" "}
-            to enroll.
-          </p>
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
+                <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24 11.36 11.36 0 0 0 3.57.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.57 1 1 0 0 1-.25 1.02Z" />
+              </svg>
+              Call {site.kids.contactName} · {site.kids.phoneDisplay}
+            </a>
+            <p className="mt-2 text-xs text-stone-500">
+              Separate from the main gym line — {site.kids.contactName} handles all kids
+              enrollment.
+            </p>
+          </div>
         </div>
         <div>
           <h2 className="font-display text-xl font-bold uppercase tracking-wide text-white">

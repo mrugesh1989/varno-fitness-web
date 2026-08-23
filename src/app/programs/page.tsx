@@ -62,6 +62,33 @@ export default function ProgramsPage() {
                   <li key={b}>{b}</li>
                 ))}
               </ul>
+              {p.slug === "youth" && (
+                <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-lg border border-brand-gold/40 bg-brand-gold/10 px-5 py-4">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-gold">
+                      Kids enrollment — dedicated line
+                    </p>
+                    <p className="mt-1 text-sm text-stone-300">
+                      Enrollment for kids classes goes through {site.kids.contactName}, not the
+                      main gym number.
+                    </p>
+                  </div>
+                  <a
+                    href={`tel:${site.kids.phoneTel}`}
+                    className="inline-flex items-center gap-2 rounded-md bg-brand-gold px-5 py-2.5 text-sm font-bold text-brand-dark transition hover:bg-brand-accentHover"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="h-4 w-4"
+                    >
+                      <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24 11.36 11.36 0 0 0 3.57.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.57 1 1 0 0 1-.25 1.02Z" />
+                    </svg>
+                    Call {site.kids.contactName} · {site.kids.phoneDisplay}
+                  </a>
+                </div>
+              )}
             </div>
           </article>
         ))}

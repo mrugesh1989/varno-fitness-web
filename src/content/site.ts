@@ -235,7 +235,6 @@ export const programs = [
       `${site.kids.season}.`,
       `Held ${site.kids.schedule}.`,
       `Pricing: ${site.kids.price}.`,
-      `Call ${site.kids.contactName} at ${site.kids.phoneDisplay} to learn more and enroll.`,
     ],
   },
 ] as const;
