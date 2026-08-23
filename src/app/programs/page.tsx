@@ -49,12 +49,14 @@ export default function ProgramsPage() {
                   </h2>
                   <p className="mt-2 text-lg font-semibold text-brand-accent">{p.price}</p>
                 </div>
-                <Link
-                  href="/contact"
-                  className="w-fit rounded-md bg-brand-accent px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-accentHover"
-                >
-                  Request info
-                </Link>
+                {p.slug !== "youth" && (
+                  <Link
+                    href="/contact"
+                    className="w-fit rounded-md bg-brand-accent px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-accentHover"
+                  >
+                    Request info
+                  </Link>
+                )}
               </div>
               <p className="mt-6 text-stone-300">{p.summary}</p>
               <ul className="mt-6 list-disc space-y-2 pl-5 text-sm text-stone-400">
