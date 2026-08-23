@@ -67,6 +67,8 @@ export const site = {
     season: "Fall 2026 (10 weeks): 9/14 – 11/20",
     schedule: "Mondays 4–5 PM (ages 8–12) & Wednesdays 4–5 PM (ages 4–7)",
     price: "$200/season, $100/4-pack, or $35 drop-in — sibling discounts available",
+    priceOptions: ["$200 / season", "$100 / 4-pack", "$35 / drop-in"],
+    priceNote: "Sibling discounts available",
   },
   google: {
     rating: 5.0,
@@ -231,11 +233,7 @@ export const programs = [
     price: "$200/season",
     summary:
       "Kids fitness in a supportive, coached environment — build confidence, develop skills, and have fun.",
-    bullets: [
-      `${site.kids.season}.`,
-      `Held ${site.kids.schedule}.`,
-      `Pricing: ${site.kids.price}.`,
-    ],
+    bullets: [`${site.kids.season}.`, `Held ${site.kids.schedule}.`],
   },
 ] as const;
 

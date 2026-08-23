@@ -66,8 +66,18 @@ export default function SchedulePage() {
           <p className="text-sm text-stone-400">
             <span className="font-semibold text-stone-200">When:</span> {site.kids.schedule}
           </p>
-          <p className="text-sm text-stone-400">
-            <span className="font-semibold text-stone-200">Price:</span> {site.kids.price}
+          <div className="mt-3 flex flex-wrap gap-2">
+            {site.kids.priceOptions.map((opt) => (
+              <span
+                key={opt}
+                className="rounded-full border border-brand-gold/50 bg-brand-gold/10 px-4 py-1.5 text-sm font-bold text-brand-gold"
+              >
+                {opt}
+              </span>
+            ))}
+          </div>
+          <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-stone-400">
+            {site.kids.priceNote}
           </p>
           <div className="mt-4 rounded-lg border border-brand-gold/40 bg-brand-gold/10 p-4">
             <p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-gold">
@@ -83,8 +93,7 @@ export default function SchedulePage() {
               Call {site.kids.contactName} · {site.kids.phoneDisplay}
             </a>
             <p className="mt-2 text-xs text-stone-500">
-              Separate from the main gym line — {site.kids.contactName} handles all kids
-              enrollment.
+              {site.kids.contactName} handles all kids enrollment.
             </p>
           </div>
         </div>

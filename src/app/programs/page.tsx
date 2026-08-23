@@ -63,14 +63,30 @@ export default function ProgramsPage() {
                 ))}
               </ul>
               {p.slug === "youth" && (
-                <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-lg border border-brand-gold/40 bg-brand-gold/10 px-5 py-4">
+                <div className="mt-6">
+                  <div className="flex flex-wrap gap-2">
+                    {site.kids.priceOptions.map((opt) => (
+                      <span
+                        key={opt}
+                        className="rounded-full border border-brand-gold/50 bg-brand-gold/10 px-4 py-1.5 text-sm font-bold text-brand-gold"
+                      >
+                        {opt}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-stone-400">
+                    {site.kids.priceNote}
+                  </p>
+                </div>
+              )}
+              {p.slug === "youth" && (
+                <div className="mt-5 flex flex-wrap items-center justify-between gap-4 rounded-lg border border-brand-gold/40 bg-brand-gold/10 px-5 py-4">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-gold">
                       Kids enrollment — dedicated line
                     </p>
                     <p className="mt-1 text-sm text-stone-300">
-                      Enrollment for kids classes goes through {site.kids.contactName}, not the
-                      main gym number.
+                      Enrollment for kids classes goes through {site.kids.contactName}.
                     </p>
                   </div>
                   <a
