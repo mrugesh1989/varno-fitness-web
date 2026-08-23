@@ -57,16 +57,20 @@ export default function SchedulePage() {
             Kids class
           </h2>
           <p className="mt-3 text-sm text-stone-300">
-            Youth fitness in a supportive, coached environment for ages confirmed by our team.
+            Youth fitness in a supportive, coached environment for ages 4–12 — build confidence,
+            develop skills, and have fun.
           </p>
           <p className="mt-2 text-sm text-stone-400">
+            <span className="font-semibold text-stone-200">Season:</span> {site.kids.season}
+          </p>
+          <p className="text-sm text-stone-400">
             <span className="font-semibold text-stone-200">When:</span> {site.kids.schedule}
           </p>
           <p className="text-sm text-stone-400">
             <span className="font-semibold text-stone-200">Price:</span> {site.kids.price}
           </p>
           <p className="mt-3 text-sm text-stone-400">
-            Call{" "}
+            Call {site.kids.contactName} at{" "}
             <a
               href={`tel:${site.kids.phoneTel}`}
               className="font-semibold text-brand-accentHover hover:underline"

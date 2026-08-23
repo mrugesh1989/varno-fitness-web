@@ -61,10 +61,12 @@ export const site = {
     instagram: "https://www.instagram.com/varno_fitness_/",
   },
   kids: {
-    phoneDisplay: "(732) 208-8942",
-    phoneTel: "+17322088942",
-    schedule: "Monday & Wednesday at 4:00 PM",
-    price: "$50/month",
+    contactName: "Coach Tara",
+    phoneDisplay: "(602) 527-0100",
+    phoneTel: "+16025270100",
+    season: "Fall 2026 (10 weeks): 9/14 – 11/20",
+    schedule: "Mondays 4–5 PM (ages 8–12) & Wednesdays 4–5 PM (ages 4–7)",
+    price: "$200/season, $100/4-pack, or $35 drop-in — sibling discounts available",
   },
   google: {
     rating: 5.0,
@@ -107,7 +109,7 @@ export const amenities = [
     slug: "kids",
     title: "CrossFit Kids",
     description:
-      "Kids fitness in a coached, supportive environment. Ages and details confirmed when you enroll.",
+      "Coached kids classes for ages 4–12 — build confidence, develop skills, and have fun.",
   },
   {
     slug: "coaching",
@@ -142,6 +144,7 @@ export const schedule = [
       { name: "VF60 Group Fitness", time: "5:15 AM" },
       { name: "VF60 Group Fitness", time: "6:20 AM" },
       { name: "VF60 Group Fitness", time: "8:30 AM" },
+      { name: "Kids Class (ages 8–12)", time: "4:00 PM" },
       { name: "VF60 Group Fitness", time: "5:20 PM" },
       { name: "VF60 Group Fitness", time: "6:30 PM" },
     ],
@@ -163,6 +166,7 @@ export const schedule = [
       { name: "VF60 Group Fitness", time: "5:15 AM" },
       { name: "VF60 Group Fitness", time: "6:20 AM" },
       { name: "VF60 Group Fitness", time: "8:30 AM" },
+      { name: "Kids Class (ages 4–7)", time: "4:00 PM" },
       { name: "VF60 Group Fitness", time: "5:20 PM" },
       { name: "VF60 Group Fitness", time: "6:30 PM" },
     ],
@@ -224,12 +228,14 @@ export const programs = [
   {
     slug: "youth",
     title: "Kids Class",
-    price: "$50/month",
-    summary: "Kids fitness in a supportive, coached environment.",
+    price: "$200/season",
+    summary:
+      "Kids fitness in a supportive, coached environment — build confidence, develop skills, and have fun.",
     bullets: [
+      `${site.kids.season}.`,
       `Held ${site.kids.schedule}.`,
-      `Call ${site.kids.phoneDisplay} to learn more and enroll.`,
-      "Ages and details confirmed by our team when you call.",
+      `Pricing: ${site.kids.price}.`,
+      `Call ${site.kids.contactName} at ${site.kids.phoneDisplay} to learn more and enroll.`,
     ],
   },
 ] as const;
@@ -264,12 +270,12 @@ export const faqs = [
   },
   {
     question: "Do you have classes for kids?",
-    answer: `Yes. Our kids class runs ${site.kids.schedule} for ${site.kids.price}. Call ${site.kids.phoneDisplay} to learn more and enroll.`,
+    answer: `Yes. Our ${site.kids.season} kids season runs ${site.kids.schedule}. Pricing is ${site.kids.price}. Call ${site.kids.contactName} at ${site.kids.phoneDisplay} to learn more and enroll.`,
   },
   {
     question: "How much does membership cost?",
     answer:
-      "Group classes range from $145–$189, private coaching from $50–$80 per session, and kids classes are $50/month. Start with a free assessment and we'll recommend the right fit.",
+      "Group classes range from $145–$189, private coaching from $50–$80 per session, and kids classes are $200 per 10-week season (4-packs and drop-ins available). Start with a free assessment and we'll recommend the right fit.",
   },
   {
     question: "Is there parking at the gym?",
